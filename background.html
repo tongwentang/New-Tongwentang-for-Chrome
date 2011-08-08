@@ -1,0 +1,268 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>新同文堂</title>
+	<script src="./lib/tongwen/tongwen_chrome_init.js"></script>
+	<script>
+	var libTongwen = 'lib/tongwen/';
+	var lastTabId  = 0;
+
+	// 合併新舊版本的設定值
+	function mergeConfig() {
+		if (typeof localStorage["tongwen"] == "undefined") {
+			localStorage["tongwen"] = JSON.stringify(tongwen);
+		} else {
+			oTongwen = JSON.parse(localStorage["tongwen"]);
+			for (var i in oTongwen) {
+				if (i == "version") continue;
+				tongwen[i] = oTongwen[i];
+			}
+			if (typeof tongwen.userPhrase["enable"] == "undefined") tongwen.userPhrase["enable"] = false;
+			localStorage["tongwen"] = JSON.stringify(tongwen); // 回存設定
+		}
+	}
+
+	// 重新載入設定值
+	function reloadConfig() {
+		tongwen = JSON.parse(localStorage["tongwen"]);
+	}
+
+	// 基本的 content script
+	function defaultSrcipt(tabId) {
+		// 轉換標點符號
+		if (tongwen.symConvert) {
+			chrome.tabs.executeScript(tabId, {file: libTongwen + "tongwen_table_ss2t.js", allFrames: true});
+			chrome.tabs.executeScript(tabId, {file: libTongwen + "tongwen_table_st2s.js", allFrames: true});
+		}
+		var script_file = {};
+		// 強制字型設定
+		if (tongwen.fontCustom.enable) {
+			script_file.code = "" +
+				"TongWen.enableCustomFontset(" + (tongwen.fontCustom.enable ? "true" : "false") + ");" +
+				"TongWen.setTradFontset('" + tongwen.fontCustom.trad + "');" +
+				"TongWen.setSimpFontset('" + tongwen.fontCustom.simp + "');";
+			script_file.allFrames = true;
+			chrome.tabs.executeScript(tabId, script_file);
+		}
+		// 自定詞彙
+		if (tongwen.userPhrase.enable) {
+			script_file.code = "" +
+				"TongWen.addS2TTable(" + JSON.stringify(tongwen.userPhrase.trad) + ");" +
+				"TongWen.addT2STable(" + JSON.stringify(tongwen.userPhrase.simp) + ");";
+			script_file.allFrames = true;
+			chrome.tabs.executeScript(tabId, script_file);
+		}
+	}
+
+	// 點選圖示動作
+	function iconAction(tabId) {
+		defaultSrcipt(tabId);
+		switch (tongwen.iconAction) {
+			case "trad": chrome.tabs.executeScript(tabId, {file: libTongwen + "tongwen_chrome_trad.js", allFrames: true}); break;
+			case "simp": chrome.tabs.executeScript(tabId, {file: libTongwen + "tongwen_chrome_simp.js", allFrames: true}); break;
+			default    : chrome.tabs.executeScript(tabId, {file: libTongwen + "tongwen_chrome_auto.js", allFrames: true});
+		}
+	}
+
+	// 設定圖示上的文字
+	function iconActionStat() {
+		switch (tongwen.iconAction) {
+			case "trad": chrome.browserAction.setBadgeText({"text": "T"}); break;
+			case "simp": chrome.browserAction.setBadgeText({"text": "S"}); break;
+			default    : chrome.browserAction.setBadgeText({"text": ""});
+		}
+	}
+
+	function urlFilterAction(uri) {
+		var lst = tongwen.urlFilter.list;
+		for (var i = 0, c = lst.length; i < c; i++) {
+			if (lst[i].url.indexOf("*")) {
+				// var url = lst[i].url.replace(/(\W+)/ig, "\\$1").replace("*.", "*\\.").replace(/\*/ig, "\\w*"); // 較為嚴謹
+				var url = lst[i].url.replace(/(\W)/ig, "\\$1").replace(/\\\*/ig, "*").replace(/\*/ig, ".*"); // 寬鬆比對
+				var re = new RegExp("^" + url + "$","ig");
+				if (uri.match(re) !== null) {
+					return lst[i].zhflag;
+				}
+			} else if (uri == lst[i].url) {
+				return lst[i].zhflag;
+			}
+		}
+		return "";
+	}
+
+	// context menus
+	function contextMenuAction() {
+		if (!tongwen.contextMenu.enable) return;
+		var pmenuID, menuId;
+		var contexts = ["page", "selection", "link", "editable", "image", "video", "audio"];
+
+		pmenuID = chrome.contextMenus.create({
+			"type"     : "normal",
+			"title"    : chrome.i18n.getMessage("extTitle"),
+			"contexts" : contexts
+		});
+		/*
+		chrome.contextMenus.create({
+			"parentId" : pmenuID,
+			"type"     : "normal",
+			"title"    : "輸入區：轉 繁體",
+			"contexts" : ["editable"],
+			"onclick"  : function (info, tab) {
+				alert(JSON.stringify(info));
+			}
+		});
+		chrome.contextMenus.create({
+			"parentId" : pmenuID,
+			"type"     : "normal",
+			"title"    : "輸入區：轉 簡體",
+			"contexts" : ["editable"],
+			"onclick"  : function (opt) {
+				alert(opt.info);
+			}
+		});
+		chrome.contextMenus.create({
+			"parentId" : pmenuID,
+			"type"     : "separator",
+			"contexts" : ["editable"]
+		});
+		*/
+		chrome.contextMenus.create({
+			"parentId" : pmenuID,
+			"type"     : "normal",
+			"title"    : "網頁：轉 繁體",
+			"contexts" : ["all"],
+			"onclick"  : function () {
+				chrome.tabs.getSelected(null, function (tab) {
+					chrome.tabs.executeScript(tab.id, {file: libTongwen + "tongwen_chrome_trad.js"});
+				});
+			}
+		});
+		chrome.contextMenus.create({
+			"parentId" : pmenuID,
+			"type"     : "normal",
+			"title"    : "網頁：轉 簡體",
+			"contexts" : ["all"],
+			"onclick"  : function () {
+				chrome.tabs.getSelected(null, function (tab) {
+					chrome.tabs.executeScript(tab.id, {file: libTongwen + "tongwen_chrome_simp.js"});
+				});
+			}
+		});
+		/*
+		chrome.contextMenus.create({
+			"parentId" : pmenuID,
+			"type"     : "normal",
+			"title"    : "選取區：轉 繁體",
+			"contexts" : ["selection"],
+			"onclick"  : function (data) {
+				alert(data.selectionText);
+				//chrome.tabs.getSelected(null, function (tab) {
+				//	chrome.tabs.executeScript(tab.id, {file: libTongwen + "tongwen_chrome_trad.js"});
+				//});
+			}
+		});
+		chrome.contextMenus.create({
+			"parentId" : pmenuID,
+			"type"     : "normal",
+			"title"    : "選取區：轉 簡體",
+			"contexts" : ["selection"],
+			"onclick"  : function () {
+				//chrome.tabs.getSelected(null, function (tab) {
+				//	chrome.tabs.executeScript(tab.id, {file: libTongwen + "tongwen_chrome_simp.js"});
+				//});
+			}
+		});
+		*/
+		/*
+		menuId = chrome.contextMenus.create({
+			"parentId" : pmenuID,
+			"type"     : "normal",
+			"title"    : "自動轉換",
+			"contexts" : contexts
+		});
+		chrome.contextMenus.create({
+			"parentId" : menuId,
+			"type"     : "radio",
+			"checked"  : true,
+			"title"    : "不啟用自動轉換",
+			"contexts" : contexts,
+			"onclick"  : function () {
+			}
+		});
+		chrome.contextMenus.create({
+			"parentId" : menuId,
+			"type"     : "radio",
+			"checked"  : false,
+			"title"    : "自動轉為 繁體 (簡 > 繁)",
+			"contexts" : contexts,
+			"onclick"  : function () {
+			}
+		});
+		chrome.contextMenus.create({
+			"parentId" : menuId,
+			"type"     : "radio",
+			"checked"  : false,
+			"title"    : "自動轉為 簡體 (繁 > 簡)",
+			"contexts" : contexts,
+			"onclick"  : function () {
+			}
+		});
+		*/
+	}
+
+	window.onload = function () {
+		mergeConfig();
+		iconActionStat();
+		contextMenuAction();
+	};
+
+	// Called when the user clicks on the browser action.
+	chrome.browserAction.onClicked.addListener(function(tab) {
+		lastTabId = tab.id;
+		iconAction(lastTabId);
+	});
+
+	function docLoaded(request, sender) {
+		// 自動轉換
+		var zhflag = "";
+		if (tongwen.urlFilter.enable) {
+			zhflag = urlFilterAction(request.baseURI);
+		}
+		if (zhflag == "") zhflag = tongwen.autoConvert;
+
+		// 轉換標點符號
+		if (tongwen.symConvert) {
+			chrome.tabs.executeScript(sender.tab.id, {file: libTongwen + "tongwen_table_ss2t.js"});
+			chrome.tabs.executeScript(sender.tab.id, {file: libTongwen + "tongwen_table_st2s.js"});
+		}
+
+		return {
+			"autoConvert": zhflag,
+			"userPhrase" : tongwen.userPhrase.enable,
+			"tradPhrase" : tongwen.userPhrase.trad,
+			"simpPhrase" : tongwen.userPhrase.simp,
+			"symConvert" : tongwen.symConvert,
+			"symTrad"    : libTongwen + "tongwen_table_ss2t.js",
+			"symSimp"    : libTongwen + "tongwen_table_st2s.js",
+			"fontEnable" : tongwen.fontCustom.enable,
+			"fontTrad"   : tongwen.fontCustom.trad,
+			"fontSimp"   : tongwen.fontCustom.simp
+		};
+	}
+
+	chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+		switch (request.reqtype) {
+			case "loaded": // 網址過濾規則與自動轉換
+				var res = docLoaded(request, sender);
+				sendResponse(res);
+				break;
+			case "contextmenu":
+				sendResponse({"tabid" : sender.tab.id});
+				break;
+		}
+	});
+	</script>
+</head>
+<body>
+</body>
+</html>

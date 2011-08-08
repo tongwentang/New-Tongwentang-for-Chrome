@@ -1,0 +1,46 @@
+{
+	"name"       : "__MSG_extName__",
+	"version"    : "0.8.3",
+
+	"description": "__MSG_extDescription__",
+	"icons": {
+		"16" : "icon/tongwen-icon-16.png",
+		"32" : "icon/tongwen-icon-32.png",
+		"48" : "icon/tongwen-icon-48.png",
+		"128": "icon/tongwen-icon-128.png"
+	},
+	"default_locale": "en",
+
+	"browser_action" : {
+		"default_title": "__MSG_extTitle__",
+		"default_icon" : "tongwen.png"
+	},
+
+	"content_scripts": [
+		{
+	 		"matches"   : ["http://*/*", "https://*/*"],
+			"js"        : [
+				"./lib/tongwen/tongwen_core.js",
+				"./lib/tongwen/tongwen_table_s2t.js" , "./lib/tongwen/tongwen_table_t2s.js",
+				"./lib/tongwen/tongwen_table_ps2t.js", "./lib/tongwen/tongwen_table_pt2s.js"
+			],
+			"run_at"    : "document_start",
+			"all_frames": true
+		},
+		{
+	 		"matches"   : ["http://*/*", "https://*/*"],
+			"js"        : ["tongwen_chrome.js"],
+			"run_at"    : "document_end",
+			"all_frames": true
+		}
+	],
+
+	"options_page": "options.html",
+	"background_page": "background.html",
+	"permissions": [
+		"http://*/*",
+		"https://*/*",
+		"tabs",
+		"contextMenus"
+	]
+}

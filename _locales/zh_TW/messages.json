@@ -1,0 +1,180 @@
+{
+	"extName": {
+		"message": "新同文堂",
+		"description": "擴充套件名稱"
+	},
+
+	"extDescription": {
+		"message": "中文繁簡轉換",
+		"description": "擴充套件描述"
+	},
+
+	"extTitle": {
+		"message": "新同文堂",
+		"description": "圖示與右鍵選單上顯示的名稱"
+	},
+
+// Context Menu ------------------------------------------------
+	"extTitle": {
+		"message": "新同文堂",
+		"description": "圖示與右鍵選單上顯示的名稱"
+	},
+// ------------------------------------------------
+
+	"optTitle": {
+		"message": "新同文堂 - 設定",
+		"description": "設定畫面的標題"
+	},
+
+	"optDlgTitleInfo": {
+		"message": "提示訊息",
+		"description": ""
+	},
+
+	"optDlgTitleLogin": {
+		"message": "登入",
+		"description": ""
+	},
+// tabs title
+	"optTabsTitleGeneral": {
+		"message": "一般設定",
+		"description": ""
+	},
+
+	"optTabsTitleURL": {
+		"message": "自訂轉換規則",
+		"description": ""
+	},
+
+	"optTabsTitlePhrase": {
+		"message": "自訂詞彙",
+		"description": ""
+	},
+// tabs general
+	"optAutoConvert": {
+		"message": "自動轉換設定",
+		"description": ""
+	},
+
+	"optAutoConvertDisable": {
+		"message": "不啟用自動轉換",
+		"description": ""
+	},
+
+	"optAutoConvertTrad": {
+		"message": "自動轉為 繁體 (簡 &gt; 繁)",
+		"description": ""
+	},
+
+	"optAutoConvertSimp": {
+		"message": "自動轉為 簡體 (繁 &gt; 簡)",
+		"description": ""
+	},
+
+	"optIconConvert": {
+		"message": "圖示轉換設定",
+		"description": ""
+	},
+
+	"optIconConvertNote": {
+		"message": "某些網頁的頁框會無法正常轉換。",
+		"description": ""
+	},
+
+	"optIconConvertAuto": {
+		"message": "自動偵測轉換 (簡 &gt; 繁、繁 &gt; 簡)",
+		"description": ""
+	},
+
+	"optIconConvertTrad": {
+		"message": "轉為 繁體 (簡 &gt; 繁)",
+		"description": ""
+	},
+
+	"optIconConvertSimp": {
+		"message": "轉為 簡體 (繁 &gt; 簡)",
+		"description": ""
+	},
+
+	"optUrlFilter": {
+		"message": "啟用自訂轉換規則",
+		"description": ""
+	},
+
+	"optUrlThUrl": {
+		"message": "網址",
+		"description": ""
+	},
+
+	"optUrlThFlag": {
+		"message": "繁簡轉換",
+		"description": ""
+	},
+
+	"optUrlFilterNote": {
+		"message": "可在網址內使用萬用字元 (*)",
+		"description": ""
+	},
+
+// ------------------------------------------------
+
+	"optMsgReplaceSetting": {
+		"message": "直接取代原本的設定",
+		"description": ""
+	},
+
+	"optMsgSaveSuccess": {
+		"message": "儲存完成！",
+		"description": ""
+	},
+
+	"optVersion": {
+		"message": "版本：",
+		"description": ""
+	},
+
+	"optBtnClose": {
+		"message": "關閉",
+		"description": ""
+	},
+
+	"optBtnSave": {
+		"message": "儲存",
+		"description": ""
+	},
+
+	"optBtnImport": {
+		"message": "匯入",
+		"description": ""
+	},
+
+	"optBtnExport": {
+		"message": "匯出",
+		"description": ""
+	},
+
+	"optBtnImportAll": {
+		"message": "匯入設定",
+		"description": ""
+	},
+
+	"optBtnExportAll": {
+		"message": "匯出設定",
+		"description": ""
+	},
+
+	"optTitleImportAll": {
+		"message": "匯入所有設定",
+		"description": ""
+	},
+
+	"optTitleExportAll": {
+		"message": "匯出所有設定",
+		"description": ""
+	},
+
+	"temp": {
+		"message": "hello world",
+		"description": "The string we search for. Put between words that go together."
+	}
+}
