@@ -2,17 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>新同文堂 - 設定</title>
+	<title></title>
 
-	<link type="text/css" rel="stylesheet" media="all" href="./css/humanity/jquery-ui-1.8.13.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="./css/humanity/jquery-ui-1.8.16.css" />
 	<link type="text/css" rel="stylesheet" media="all" href="./css/tongwen.css" />
 
-	<script src="./lib/jquery/jquery-1.5.1.min.js"></script>
-	<script src="./lib/jquery/jquery-ui-1.8.13.min.js"></script>
-	<script src="./options.js"></script>
+	<script src="./lib/jquery/jquery-1.6.2.min.js"></script>
+	<script src="./lib/jquery/jquery-ui-1.8.16.min.js"></script>
+	<script src="options.js"></script>
 </head>
 <body>
-	<div id="msgDialog" title="提示訊息">
+	<div id="msgDialog" title="dlgNotice">
 		<div id="msgContent"></div>
 	</div>
 	<div id="msgInOutDialog" title="">
@@ -21,88 +21,85 @@
 			<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span><span id="msgNotice"></span>
 		</div>
 		<div><textarea id="tongwenOptions" class="text ui-widget-content ui-corner-all"></textarea></div>
-		<div id="divReplace"><input type="checkbox" name="ckReplace" id="ckReplace"><label for="ckReplace">直接取代原本的設定</label></div>
+		<div id="divReplace"><input type="checkbox" name="ckReplace" id="ckReplace"><label for="ckReplace">labelReplaceOption</label></div>
 		<div id="divWarning" style="padding: 3px 10px; margin: 5px 0 0 0; display: none;" class="ui-state-error ui-corner-all">
 			<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-alert"></span><span id="msgWarning"></span>
 		</div>
 		</form>
 	</div>
-	<div id="msgLoginDialog" title="登入">
-		<iframe style="width: 100%; height: 450px; border: none; margin: 0; padding: 0;" src="about:blank"></iframe>
-	</div>
 
 	<form style="display: inline;">
 	<div id="tongwenWrap" class="ui-widget ui-widget-content ui-corner-all">
 		<div id="msgBanner" style="padding: 3px 10px; margin: 0px 1px 5px 1px; display: none;" class="ui-state-highlight ui-corner-all">
-			<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span><span id="msgBannerContent">儲存完成！</span>
+			<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span><span id="msgBannerContent"></span>
 		</div>
 		<div id="tabsTongwen">
 			<ul>
-				<li><a href="#tabsGeneral">一般設定</a></li>
-				<li><a href="#tabsUrl">自訂轉換規則</a></li>
-				<li><a href="#tabsPhrase">自訂詞彙</a></li>
+				<li><a href="#tabsGeneral">tabsGeneral</a></li>
+				<li><a href="#tabsUrl">tabsUrl</a></li>
+				<li><a href="#tabsPhrase">tabsPhrase</a></li>
 			</ul>
 
 			<!-- 一般設定 -->
 			<div id="tabsGeneral">
 				<fieldset>
-					<legend>自動轉換設定</legend>
-					<div><input name="autoConvert" id="autoConvertNone" type="radio" value="none"/><label for="autoConvertNone">不啟用自動轉換</label></div>
-					<div><input name="autoConvert" id="autoConvertTrad" type="radio" value="trad"/><label for="autoConvertTrad">自動轉為 繁體 (簡 &gt; 繁)</label></div>
-					<div><input name="autoConvert" id="autoConvertSimp" type="radio" value="simp"/><label for="autoConvertSimp">自動轉為 簡體 (繁 &gt; 簡)</label></div>
+					<legend>labelAutoConvert</legend>
+					<div><input name="autoConvert" id="autoConvertNone" type="radio" value="none"/><label for="autoConvertNone">labelAutoConvertNone</label></div>
+					<div><input name="autoConvert" id="autoConvertTrad" type="radio" value="trad"/><label for="autoConvertTrad">labelAutoConvertTrad</label></div>
+					<div><input name="autoConvert" id="autoConvertSimp" type="radio" value="simp"/><label for="autoConvertSimp">labelAutoConvertSimp</label></div>
 				</fieldset>
 				<fieldset>
-					<legend>圖示轉換設定</legend>
+					<legend>labelIconAction</legend>
 					<div style="display: none; padding: 3px 10px; margin: 4px 5px 4px 0px;" class="ui-state-highlight ui-corner-all">
-						<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>某些網頁的頁框會無法正常轉換。
+						<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span><span>msgFrameNotConvert</span>
 					</div>
-					<div><input name="iconAction" id="iconActionAuto" type="radio" value="auto"/><label for="iconActionAuto">自動偵測轉換 (簡 &gt; 繁、繁 &gt; 簡)</label></div>
-					<div><input name="iconAction" id="iconActionTrad" type="radio" value="trad"/><label for="iconActionTrad">轉為 繁體 (簡 &gt; 繁)</label></div>
-					<div><input name="iconAction" id="iconActionSimp" type="radio" value="simp"/><label for="iconActionSimp">轉為 簡體 (繁 &gt; 簡)</label></div>
+					<div><input name="iconAction" id="iconActionAuto" type="radio" value="auto"/><label for="iconActionAuto">labelIconActionAuto</label></div>
+					<div><input name="iconAction" id="iconActionTrad" type="radio" value="trad"/><label for="iconActionTrad">labelIconActionTrad</label></div>
+					<div><input name="iconAction" id="iconActionSimp" type="radio" value="simp"/><label for="iconActionSimp">labelIconActionSimp</label></div>
 				</fieldset>
 				<fieldset>
-					<legend>標點符號轉換</legend>
-					<div><input name="symConvert" id="symbolEnable" type="radio" value="enable"/><label for="symbolEnable">啟用 標點符號 轉換</label></div>
-					<div><input name="symConvert" id="symbolDisable" type="radio" value="disable"/><label for="symbolDisable">停用 標點符號 轉換</label></div>
+					<legend>labelSymbolConvert</legend>
+					<div><input name="symConvert" id="symbolEnable" type="radio" value="enable"/><label for="symbolEnable">labelSymbolConvertEnable</label></div>
+					<div><input name="symConvert" id="symbolDisable" type="radio" value="disable"/><label for="symbolDisable">labelSymbolConvertDisable</label></div>
 				</fieldset>
 				<fieldset>
-					<legend>顯示字型設定</legend>
-					<div><input name="fontEnable" id="fontEnable" type="checkbox" value="enable"/><label for="fontEnable">強制字型轉換</label></div>
-					<div><label for="fontTrad">繁體顯示字型：</label><input name="fontTrad" id="fontTrad" type="text" value="" size="40"/></div>
-					<div><label for="fontSimp">簡體顯示字型：</label><input name="fontSimp" id="fontSimp" type="text" value="" size="40"/></div>
+					<legend>labelShowFontSet</legend>
+					<div><input name="fontEnable" id="fontEnable" type="checkbox" value="enable"/><label for="fontEnable">labelShowFontSetEnable</label></div>
+					<div><label for="fontTrad">labelShowFontSetTrad</label><input name="fontTrad" id="fontTrad" type="text" value="" size="40"/></div>
+					<div><label for="fontSimp">labelShowFontSetSimp</label><input name="fontSimp" id="fontSimp" type="text" value="" size="40"/></div>
 				</fieldset>
-				<div><input name="enableContextMenu" id="enableContextMenu" type="checkbox" value="enable"/><label for="enableContextMenu">啟用 右鍵選單 (瀏覽器重新啟動後，才會生效)</label></div>
+				<div><input name="enableContextMenu" id="enableContextMenu" type="checkbox" value="enable"/><label for="enableContextMenu">labelContextMenuEnable</label></div>
 			</div>
 
 			<!-- 自訂網址轉換規則 -->
 			<div id="tabsUrl">
-				<div><input type="checkbox" name="enableUrlFilter" id="enableUrlFilter"><label for="enableUrlFilter">啟用自訂轉換規則</label></div>
+				<div><input type="checkbox" name="enableUrlFilter" id="enableUrlFilter"><label for="enableUrlFilter">labelUrlFilterEnable</label></div>
 				<div id="paneUrlFilter">
 					<ul id="tableUrlList">
 						<li class="ui-state-default disabled">
-							<span class="url center">網址</span>
-							<span class="zhflag center">繁簡轉換</span>
-							<span class="icon ui-state-default right"><span class="ui-icon icon-import" title="匯入"></span></span>
-							<span class="icon ui-state-default right"><span class="ui-icon icon-export" title="匯出"></span></span>
+							<span class="url center">labelUrlFilterUrl</span>
+							<span class="zhflag center">labelUrlFilterConvert</span>
+							<span class="icon ui-state-default right"><span class="ui-icon icon-import" title="btnImport"></span></span>
+							<span class="icon ui-state-default right"><span class="ui-icon icon-export" title="btnExport"></span></span>
 						</li>
 					</ul>
 				</div>
 				<div style="padding: 3px 10px; margin: 4px 5px 4px 0px;" class="ui-state-highlight ui-corner-all">
-					<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span>可在網址內使用萬用字元 (*)
+					<span style="float: left; margin-right: 0.3em;" class="ui-icon ui-icon-info"></span><span>msgUrlFilter</span>
 				</div>
 				<div id="tableUrlEdit">
 					<table border="0" cellpadding="0" cellspacing="0" width="98%">
 						<tr>
 							<td>
-								<div>網址：<input type="text" value="" name="urlAnchor" id="urlAnchor" class="text ui-widget-content ui-corner-all"></div>
-								<div>繁簡轉換：<input type="radio" name="urlAction" id="urlActionNone" value="none" checked="checked"><label for="urlActionNone">不轉換</label>
-									<input type="radio" name="urlAction" id="urlActionTrad" value="trad"><label for="urlActionTrad">轉 繁體</label>
-									<input type="radio" name="urlAction" id="urlActionSimp" value="simp"><label for="urlActionSimp">轉 簡體</label>
+								<div><span>labelUrlFilterUrlColon</span><input type="text" value="" name="urlAnchor" id="urlAnchor" class="text ui-widget-content ui-corner-all"></div>
+								<div><span>labelUrlFilterConvertColon</span><input type="radio" name="urlAction" id="urlActionNone" value="none" checked="checked"><label for="urlActionNone">labelNoTranslate</label>
+									<input type="radio" name="urlAction" id="urlActionTrad" value="trad"><label for="urlActionTrad">labelToTraditional</label>
+									<input type="radio" name="urlAction" id="urlActionSimp" value="simp"><label for="urlActionSimp">labelToSimplified</label>
 								</div>
 							</td>
 							<td align="right">
-								<div><button id="btnAddUrl" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">新增</span></button></div>
-								<div style="display: none;"><button id="btnCancel" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">取消</span></button></div>
+								<div><button id="btnAddUrl" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">btnAdd</span></button></div>
+								<div style="display: none;"><button id="btnCancel" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">btnCancel</span></button></div>
 							</td>
 						</tr>
 					</table>
@@ -111,20 +108,20 @@
 
 			<!-- 自訂詞彙 -->
 			<div id="tabsPhrase">
-				<div><input type="checkbox" id="enableCustomPhrase"><label for="enableCustomPhrase">啟用自訂詞彙</label></div>
+				<div><input type="checkbox" id="enableCustomPhrase"><label for="enableCustomPhrase">labelCustomPhraseEnable</label></div>
 				<div id="tabUserPhrase">
 					<ul>
-						<li><a href="#tabsTrad">簡 轉 繁</a></li>
-						<li><a href="#tabsSimp">繁 转 简</a></li>
+						<li><a href="#tabsTrad">tabSimpToTrad</a></li>
+						<li><a href="#tabsSimp">tabTradToSimp</a></li>
 					</ul>
 					<div id="tabsTrad">
 						<div id="paneTrad">
 							<ul id="tableTradList">
 								<li class="ui-state-default disabled">
-									<span class="simp center">簡體</span>
-									<span class="trad center">繁體</span>
-									<span class="icon ui-state-default right"><span class="ui-icon icon-import" title="匯入"></span></span>
-									<span class="icon ui-state-default right"><span class="ui-icon icon-export" title="匯出"></span></span>
+									<span class="simp center">labelSimplified</span>
+									<span class="trad center">labelTraditional</span>
+									<span class="icon ui-state-default right"><span class="ui-icon icon-import" title="btnImport"></span></span>
+									<span class="icon ui-state-default right"><span class="ui-icon icon-export" title="btnExport"></span></span>
 								</li>
 							</ul>
 						</div>
@@ -132,12 +129,12 @@
 							<table border="0" cellpadding="0" cellspacing="0" width="98%">
 								<tr>
 									<td>
-										<div>簡體：<input type="text" value="" name="tradSimp" id="tradSimp" class="text ui-widget-content ui-corner-all"></div>
-										<div>繁體：<input type="text" value="" name="tradTrad" id="tradTrad" class="text ui-widget-content ui-corner-all"></div>
+										<div><span>labelSimplifiedColon</span><input type="text" value="" name="tradSimp" id="tradSimp" class="text ui-widget-content ui-corner-all"></div>
+										<div><span>labelTraditionalColon</span><input type="text" value="" name="tradTrad" id="tradTrad" class="text ui-widget-content ui-corner-all"></div>
 									</td>
 									<td align="right">
-										<div><button id="btnAddTrad" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">新增</span></button></div>
-										<div style="display: none;"><button id="btnTradCancel" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">取消</span></button></div>
+										<div><button id="btnAddTrad" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">btnAdd</span></button></div>
+										<div style="display: none;"><button id="btnTradCancel" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">btnCancel</span></button></div>
 									</td>
 								</tr>
 							</table>
@@ -147,10 +144,10 @@
 						<div id="paneSimp">
 							<ul id="tableSimpList">
 								<li class="ui-state-default disabled">
-									<span class="trad center">繁体</span>
-									<span class="simp center">简体</span>
-									<span class="icon ui-state-default right"><span class="ui-icon icon-import" title="汇入"></span></span>
-									<span class="icon ui-state-default right"><span class="ui-icon icon-export" title="汇出"></span></span>
+									<span class="trad center">labelTraditional</span>
+									<span class="simp center">labelSimplified</span>
+									<span class="icon ui-state-default right"><span class="ui-icon icon-import" title="btnImport"></span></span>
+									<span class="icon ui-state-default right"><span class="ui-icon icon-export" title="btnExport"></span></span>
 								</li>
 							</ul>
 						</div>
@@ -158,12 +155,12 @@
 							<table border="0" cellpadding="0" cellspacing="0" width="98%">
 								<tr>
 									<td>
-										<div>繁体：<input type="text" value="" name="simpTrad" id="simpTrad" class="text ui-widget-content ui-corner-all"></div>
-										<div>简体：<input type="text" value="" name="simpSimp" id="simpSimp" class="text ui-widget-content ui-corner-all"></div>
+										<div><span>labelTraditionalColon</span><input type="text" value="" name="simpTrad" id="simpTrad" class="text ui-widget-content ui-corner-all"></div>
+										<div><span>labelSimplifiedColon</span><input type="text" value="" name="simpSimp" id="simpSimp" class="text ui-widget-content ui-corner-all"></div>
 									</td>
 									<td align="right">
-										<div><button id="btnAddSimp" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">加入</span></button></div>
-										<div style="display: none;"><button id="btnSimpCancel" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">取消</span></button></div>
+										<div><button id="btnAddSimp" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">btnAdd</span></button></div>
+										<div style="display: none;"><button id="btnSimpCancel" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"><span class="ui-button-text">btnCancel</span></button></div>
 									</td>
 								</tr>
 							</table>
