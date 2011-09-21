@@ -39,7 +39,7 @@ fieldset div { padding-left: 10px; }
 
 #tableTradPhraseEdit, #tableSimpPhraseEdit { border: 1px solid #DDDDDD; clear: right; position: relative; width: 100%; margin: 5px 0 0 0; }
 #tableTradPhraseEdit > table, #tableSimpPhraseEdit > table { margin: 5px; }
-#tableTradPhraseEdit input, #tableSimpPhraseEdit input { width: 80%; }
+#tableTradPhraseEdit input, #tableSimpPhraseEdit input { width: 75%; }
 
 #msgContent { font-size: 14px; }
 

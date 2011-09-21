@@ -1,295 +1,295 @@
 {
 	"extName": {
-		"message": "新同文堂",
+		"message": "New Tong Wen Tang",
 		"description": ""
 	},
 	"extDescription": {
-		"message": "繁體簡體中文轉換工具",
+		"message": "Traditional and Simplified Chinese Converter",
 		"description": ""
 	},
 	"extTitle": {
-		"message": "新同文堂",
+		"message": "New Tong Wen Tang",
 		"description": ""
 	},
 	"optionTitle": {
-		"message": "新同文堂 - 設定",
+		"message": "New Tong Wen Tang - Options",
 		"description": ""
 	},
 	"optionVersion": {
-		"message": "版本：",
+		"message": "Version: ",
 		"description": ""
 	},
 
 	"btnClose": {
-		"message": "關閉",
+		"message": "Close",
 		"description": ""
 	},
 	"btnSave": {
-		"message": "儲存",
+		"message": "Save",
 		"description": ""
 	},
 	"btnImportOptions": {
-		"message": "匯入設定",
+		"message": "Import Options",
 		"description": ""
 	},
 	"btnExportOptions": {
-		"message": "匯出設定",
+		"message": "Export Options",
 		"description": ""
 	},
 	"btnImport": {
-		"message": "匯入",
+		"message": "Import",
 		"description": ""
 	},
 	"btnExport": {
-		"message": "匯出",
+		"message": "Export",
 		"description": ""
 	},
 	"btnCancel": {
-		"message": "取消",
+		"message": "Cancel",
 		"description": ""
 	},
 	"btnApply": {
-		"message": "套用",
+		"message": "Apply",
 		"description": ""
 	},
 	"btnDelete": {
-		"message": "刪除",
+		"message": "Delete",
 		"description": ""
 	},
 	"btnEdit": {
-		"message": "修改",
+		"message": "Edit",
 		"description": ""
 	},
 	"btnOK": {
-		"message": "確定",
+		"message": "OK",
 		"description": ""
 	},
 	"btnAdd": {
-		"message": "新增",
+		"message": "Add",
 		"description": ""
 	},
 
 	"dlgImportOption": {
-		"message": "匯入所有設定",
+		"message": "Import all options",
 		"description": ""
 	},
 	"dlgExportOption": {
-		"message": "匯出所有設定",
+		"message": "Export all options",
 		"description": ""
 	},
 	"dlgImportRules": {
-		"message": "匯入網址自訂轉換規則",
+		"message": "Import URL-based conversion rules",
 		"description": ""
 	},
 	"dlgExportRules": {
-		"message": "匯出網址自訂轉換規則",
+		"message": "Export URL-based conversion rules",
 		"description": ""
 	},
 	"dlgWarning": {
-		"message": "警告",
+		"message": "WARNING",
 		"description": ""
 	},
 	"dlgImportPhraseTrad": {
-		"message": "匯入簡轉繁對照表",
+		"message": "Import Simplified-to-Traditional phrase table",
 		"description": ""
 	},
 	"dlgExportPhraseTrad": {
-		"message": "匯出簡轉繁對照表",
+		"message": "Export Simplified-to-Traditional phrase table",
 		"description": ""
 	},
 	"dlgImportPhraseSimp": {
-		"message": "匯入繁轉簡對照表",
+		"message": "Import Traditional-to-Simplified phrase table",
 		"description": ""
 	},
 	"dlgExportPhraseSimp": {
-		"message": "匯出繁轉簡對照表",
+		"message": "Export Traditional-to-Simplified phrase table",
 		"description": ""
 	},
 	"dlgNotice": {
-		"message": "提示訊息",
+		"message": "Note",
 		"description": ""
 	},
 
 	"tabsGeneral": {
-		"message": "一般設定",
+		"message": "General",
 		"description": ""
 	},
 	"tabsUrl": {
-		"message": "自訂轉換規則",
+		"message": "Customize Conversion Rules",
 		"description": ""
 	},
 	"tabsPhrase": {
-		"message": "自訂詞彙",
+		"message": "Customize Phrases",
 		"description": ""
 	},
 	"tabSimpToTrad": {
-		"message": "簡 轉 繁",
+		"message": "Simplified to Traditional",
 		"description": ""
 	},
 	"tabTradToSimp": {
-		"message": "繁 轉 簡",
+		"message": "Traditional to Simplified",
 		"description": ""
 	},
 
 	"msgSaveSuccess": {
-		"message": "設定儲存完成。",
+		"message": "Options saved.",
 		"description": ""
 	},
 	"msgExportNotice": {
-		"message": "請記得先儲存再匯出。",
+		"message": "Please save before export.",
 		"description": ""
 	},
 	"msgImportNotice": {
-		"message": "請貼上之前備份的設定。",
+		"message": "Please paste exported option data.",
 		"description": ""
 	},
 	"msgImportSuccess": {
-		"message": "設定資料匯入完成。",
+		"message": "Options imported.",
 		"description": ""
 	},
 	"msgImportFailed": {
-		"message": "輸入的設定資料格式錯誤，請重新輸入！",
+		"message": "Data format error. Please try again!",
 		"description": ""
 	},
 	"msgUrlNotEmpty": {
-		"message": "網址不得為空白，請填寫網址！",
+		"message": "URL can not be empty. Please enter a valid URL!",
 		"description": ""
 	},
 	"msgPhraseNotEmpty": {
-		"message": "要轉換的字串不得為空白，請填寫！",
+		"message": "Phrase can not be empty. Please enter a phrase to convert!",
 		"description": ""
 	},
 	"msgFrameNotConvert": {
-		"message": "某些網頁的頁框會無法正常轉換。",
+		"message": "Some frames of websites can not be converted normally.",
 		"description": ""
 	},
 	"msgUrlFilter": {
-		"message": "可在網址內使用萬用字元 (*)",
+		"message": "You can use wildcard (*) in an URL.",
 		"description": ""
 	},
 
 	"labelNoTranslate": {
-		"message": "不轉換",
+		"message": "Do not convert",
 		"description": ""
 	},
 	"labelToTraditional": {
-		"message": "轉 繁體",
+		"message": "to Traditional",
 		"description": ""
 	},
 	"labelToSimplified": {
-		"message": "轉 簡體",
+		"message": "to Simplified",
 		"description": ""
 	},
 	"labelReplaceOption": {
-		"message": "直接取代原本的設定",
+		"message": "Override options",
 		"description": ""
 	},
 	"labelTraditional": {
-		"message": "繁體",
+		"message": "Traditional",
 		"description": ""
 	},
 	"labelSimplified": {
-		"message": "簡體",
+		"message": "Simplified",
 		"description": ""
 	},
 	"labelTraditionalColon": {
-		"message": "繁體：",
+		"message": "Traditional: ",
 		"description": ""
 	},
 	"labelSimplifiedColon": {
-		"message": "簡體：",
+		"message": "Simplified: ",
 		"description": ""
 	},
 
 	"labelAutoConvert": {
-		"message": "自動轉換設定",
+		"message": "AutoConversion Settings",
 		"description": ""
 	},
 	"labelAutoConvertNone": {
-		"message": "不啟用自動轉換",
+		"message": "Disable AutoConversion",
 		"description": ""
 	},
 	"labelAutoConvertTrad": {
-		"message": "自動轉為 繁體 (簡 > 繁)",
+		"message": "Convert to Traditional (Simplified-to-Traditional) automatically",
 		"description": ""
 	},
 	"labelAutoConvertSimp": {
-		"message": "自動轉為 簡體 (繁 > 簡)",
+		"message": "Convert to Simplified (Traditional-to-Simplified) automatically",
 		"description": ""
 	},
 
 	"labelIconAction": {
-		"message": "圖示轉換設定",
+		"message": "Button Function",
 		"description": ""
 	},
 	"labelIconActionAuto": {
-		"message": "自動偵測轉換 (簡 > 繁、繁 > 簡)",
+		"message": "Detect and Convert automatically (Simplified-to-Traditional and Traditional-to-Simplified)",
 		"description": ""
 	},
 	"labelIconActionTrad": {
-		"message": "轉為 繁體 (簡 > 繁)",
+		"message": "Convert to Traditional (Simplified-to-Traditional)",
 		"description": ""
 	},
 	"labelIconActionSimp": {
-		"message": "轉為 簡體 (繁 > 簡)",
+		"message": "Convert to Simplified (Traditional-to-Simplified)",
 		"description": ""
 	},
 	"labelSymbolConvert": {
-		"message": "標點符號轉換",
+		"message": "Punctuation Conversion",
 		"description": ""
 	},
 	"labelSymbolConvertEnable": {
-		"message": "啟用 標點符號 轉換",
+		"message": "Enable Punctuation Conversion",
 		"description": ""
 	},
 	"labelSymbolConvertDisable": {
-		"message": "停用 標點符號 轉換",
+		"message": "Disable Punctuation Conversion",
 		"description": ""
 	},
 	"labelShowFontSet": {
-		"message": "顯示字型設定",
+		"message": "Set Font",
 		"description": ""
 	},
 	"labelShowFontSetEnable": {
-		"message": "強制字型轉換",
+		"message": "Specify Font Changing",
 		"description": ""
 	},
 	"labelShowFontSetTrad": {
-		"message": "繁體顯示字型：",
+		"message": "Font for Traditional Chinese: ",
 		"description": ""
 	},
 	"labelShowFontSetSimp": {
-		"message": "簡體顯示字型：",
+		"message": "Font for Simplified Chinese: ",
 		"description": ""
 	},
 	"labelContextMenuEnable": {
-		"message": "啟用 右鍵選單 (瀏覽器重新啟動後，才會生效)",
+		"message": "Enable Context/Right-Click Menu (will take effect after restarting browser)",
 		"description": ""
 	},
 
 	"labelUrlFilterEnable": {
-		"message": "啟用自訂轉換規則",
+		"message": "Enable Customized Conversion Rules",
 		"description": ""
 	},
 	"labelUrlFilterUrl": {
-		"message": "網址",
+		"message": "URL",
 		"description": ""
 	},
 	"labelUrlFilterConvert": {
-		"message": "繁簡轉換",
+		"message": "Conversion",
 		"description": ""
 	},
 	"labelUrlFilterUrlColon": {
-		"message": "網址：",
+		"message": "URL: ",
 		"description": ""
 	},
 	"labelUrlFilterConvertColon": {
-		"message": "繁簡轉換：",
+		"message": "Conversion: ",
 		"description": ""
 	},
 	
 	"labelCustomPhraseEnable": {
-		"message": "啟用自訂詞彙",
+		"message": "Enable Customized Phrases",
 		"description": ""
 	},
 
