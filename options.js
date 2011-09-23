@@ -43,6 +43,17 @@ function urlAction() {
 	}
 	$("#tableUrlList").append(txt);
 }
+// 輸入區轉換設定值
+function inputAction() {
+	var val = tongwen.inputConvert || "none";
+	switch (val) {
+		case "auto": $("#inputConvertAuto").attr("checked", true); break;
+		case "trad": $("#inputConvertTrad").attr("checked", true); break;
+		case "simp": $("#inputConvertSimp").attr("checked", true); break;
+		default    : $("#inputConvertNone").attr("checked", true); val = "none";
+	}
+	tongwen["inputConvert"] = val;
+}
 // 標點符號轉換設定值
 function symbolAction() {
 	var val = tongwen.symConvert;
@@ -112,9 +123,10 @@ function contextMenuAction() {
 // ----------------------------------------------------------------------
 // 儲存設定
 function saveOptions() {
-	tongwen.iconAction  = $("input[name=iconAction]:checked").val();
-	tongwen.autoConvert = $("input[name=autoConvert]:checked").val();
-	tongwen.symConvert  = ($("#symbolEnable").length > 0) ? $("#symbolEnable").get(0).checked : false;
+	tongwen.iconAction   = $("input[name=iconAction]:checked").val();
+	tongwen.autoConvert  = $("input[name=autoConvert]:checked").val();
+	tongwen.inputConvert = $("input[name=inputConvert]:checked").val();
+	tongwen.symConvert   = ($("#symbolEnable").length > 0) ? $("#symbolEnable").get(0).checked : false;
 	// 網址轉換規則
 	tongwen.urlFilter = {
 		"enable": $("#enableUrlFilter").attr("checked"),
@@ -183,6 +195,7 @@ function restoreOptions() {
 	autoConvert();
 	iconAction();
 	urlAction();
+	inputAction();
 	symbolAction();
 	fontAction();
 	phraseAction();

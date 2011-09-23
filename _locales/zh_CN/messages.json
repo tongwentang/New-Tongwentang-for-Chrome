@@ -167,6 +167,14 @@
 		"message": "可在网址内使用万用字元 (*)",
 		"description": ""
 	},
+	"msgInputConvert1": {
+		"message": "要转换时，请先让鼠标停留在输入区内，再点选工具列上的图标",
+		"description": ""
+	},
+	"msgInputConvert2": {
+		"message": "不支援“所见即所得”输入区内的文字转换",
+		"description": ""
+	},
 
 	"labelNoTranslate": {
 		"message": "不转换",
@@ -232,6 +240,26 @@
 	},
 	"labelIconActionSimp": {
 		"message": "转为 简体 (繁 > 简)",
+		"description": ""
+	},
+	"labelInputConvert": {
+		"message": "输入区转换设定",
+		"description": ""
+	},
+	"labelinputConvertNone": {
+		"message": "停用 输入区转换",
+		"description": ""
+	},
+	"labelinputConvertAuto": {
+		"message": "输入区文字繁简转换 (简 > 繁、繁 > 简)",
+		"description": ""
+	},
+	"labelinputConvertTrad": {
+		"message": "输入区文字转为 繁体 (简 > 繁)",
+		"description": ""
+	},
+	"labelinputConvertSimp": {
+		"message": "输入区文字转为 简体 (繁 > 简)",
 		"description": ""
 	},
 	"labelSymbolConvert": {
