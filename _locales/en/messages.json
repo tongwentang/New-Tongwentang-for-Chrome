@@ -168,11 +168,11 @@
 		"description": ""
 	},
 	"msgInputConvert1": {
-		"message": "要轉換時，請先讓游標停留在輸入區內，再點選工具列上的圖示",
+		"message": "Click TextArea box first then click the Toolbar icon to convert the content text in TextArea",
 		"description": ""
 	},
 	"msgInputConvert2": {
-		"message": "不支援「所見即所得」輸入區內的文字轉換",
+		"message": "This feature is NOT supported in WYSIWYG TextArea editors",
 		"description": ""
 	},
 
@@ -231,7 +231,7 @@
 		"description": ""
 	},
 	"labelIconActionAuto": {
-		"message": "Detect and Convert automatically (Simplified-to-Traditional and Traditional-to-Simplified)",
+		"message": "Detect and Convert automatically <br />(Simplified-to-Traditional and Traditional-to-Simplified)",
 		"description": ""
 	},
 	"labelIconActionTrad": {
@@ -243,23 +243,23 @@
 		"description": ""
 	},
 	"labelInputConvert": {
-		"message": "輸入區轉換設定",
+		"message": "TextArea Conversion Configuration",
 		"description": ""
 	},
 	"labelinputConvertNone": {
-		"message": "停用 輸入區轉換",
+		"message": "Disable TextArea conversion",
 		"description": ""
 	},
 	"labelinputConvertAuto": {
-		"message": "輸入區文字繁簡轉換 (簡 > 繁、繁 > 簡)",
+		"message": "Convert content in TextArea <br />(Simplified-to-Traditional and Traditional-to-Simplified)",
 		"description": ""
 	},
 	"labelinputConvertTrad": {
-		"message": "輸入區文字轉為 繁體 (簡 > 繁)",
+		"message": "Convert content in TextArea to Traditional Chinese <br />(Simplified-to-Traditional)",
 		"description": ""
 	},
 	"labelinputConvertSimp": {
-		"message": "輸入區文字轉為 簡體 (繁 > 簡)",
+		"message": "Convert content in TextArea to Simplified Chinese <br />(Traditional-to-Simplified)",
 		"description": ""
 	},
 	"labelSymbolConvert": {

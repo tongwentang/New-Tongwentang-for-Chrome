@@ -579,7 +579,7 @@ function loadLang() {
 		atr = $(this).text();
 		msg = chrome.i18n.getMessage(atr);
 		if (msg !== '') {
-			$(this).text(msg);
+			$(this).html(msg);
 		}
 	});
 }

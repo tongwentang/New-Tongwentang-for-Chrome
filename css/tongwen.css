@@ -44,3 +44,7 @@ fieldset div { padding-left: 10px; }
 #msgContent { font-size: 14px; }
 
 #tongwenOptions { width: 100%; height: 200px; }
+
+#tabsGeneral fieldset div input[type="radio"] {display: block; float: left;}
+#tabsGeneral fieldset div input[type="radio"] + label { display: inline-block; clear: right; }
+.ui-icon-info + span { display: inline-block; width: 95%; }
