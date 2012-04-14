@@ -1,6 +1,6 @@
 {
 	"name"       : "__MSG_extName__",
-	"version"    : "0.9",
+	"version"    : "1.0",
 
 	"description": "__MSG_extDescription__",
 	"icons": {
@@ -18,7 +18,7 @@
 
 	"content_scripts": [
 		{
-	 		"matches"   : ["http://*/*", "https://*/*"],
+	 		"matches"   : ["http://*/*", "https://*/*", "file://*/*"],
 			"js"        : [
 				"./lib/tongwen/tongwen_core.js",
 				"./lib/tongwen/tongwen_table_s2t.js" , "./lib/tongwen/tongwen_table_t2s.js",
@@ -28,7 +28,7 @@
 			"all_frames": true
 		},
 		{
-	 		"matches"   : ["http://*/*", "https://*/*"],
+	 		"matches"   : ["http://*/*", "https://*/*", "file://*/*"],
 			"js"        : ["tongwen_chrome.js"],
 			"run_at"    : "document_end",
 			"all_frames": true
@@ -40,7 +40,11 @@
 	"permissions": [
 		"http://*/*",
 		"https://*/*",
+		"file://*/*",
 		"tabs",
-		"contextMenus"
-	]
+		"contextMenus",
+        "webNavigation",
+        "clipboardRead",
+        "clipboardWrite"
+    ]
 }

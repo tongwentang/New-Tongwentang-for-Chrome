@@ -10,9 +10,9 @@ var btnList = null;
 function autoConvert() {
 	var val = tongwen.autoConvert || "none";
 	switch (val) {
-		case "trad": $("#autoConvertTrad").attr("checked", true); break;
-		case "simp": $("#autoConvertSimp").attr("checked", true); break;
-		default    : $("#autoConvertNone").attr("checked", true); val = "none";
+		case "trad": $("#autoConvertTrad").prop("checked", true); break;
+		case "simp": $("#autoConvertSimp").prop("checked", true); break;
+		default    : $("#autoConvertNone").prop("checked", true); val = "none";
 	}
 	tongwen["autoConvert"] = val;
 }
@@ -20,9 +20,9 @@ function autoConvert() {
 function iconAction() {
 	var val = tongwen.iconAction || "auto";
 	switch (val) {
-		case "trad": $("#iconActionTrad").attr("checked", true); break;
-		case "simp": $("#iconActionSimp").attr("checked", true); break;
-		default    : $("#iconActionAuto").attr("checked", true); val = "auto";
+		case "trad": $("#iconActionTrad").prop("checked", true); break;
+		case "simp": $("#iconActionSimp").prop("checked", true); break;
+		default    : $("#iconActionAuto").prop("checked", true); val = "auto";
 	}
 	tongwen["iconAction"] = val;
 }
@@ -30,9 +30,9 @@ function iconAction() {
 function urlAction() {
 	var val = tongwen.urlFilter.enable || false;
 	if (val) {
-		$("#enableUrlFilter").attr("checked", true);
+		$("#enableUrlFilter").prop("checked", true);
 	} else {
-		$("#enableUrlFilter").removeAttr("checked");
+		$("#enableUrlFilter").removeProp("checked");
 	}
 	val = tongwen.urlFilter.list;
 	var txt = "";
@@ -47,10 +47,10 @@ function urlAction() {
 function inputAction() {
 	var val = tongwen.inputConvert || "none";
 	switch (val) {
-		case "auto": $("#inputConvertAuto").attr("checked", true); break;
-		case "trad": $("#inputConvertTrad").attr("checked", true); break;
-		case "simp": $("#inputConvertSimp").attr("checked", true); break;
-		default    : $("#inputConvertNone").attr("checked", true); val = "none";
+		case "auto": $("#inputConvertAuto").prop("checked", true); break;
+		case "trad": $("#inputConvertTrad").prop("checked", true); break;
+		case "simp": $("#inputConvertSimp").prop("checked", true); break;
+		default    : $("#inputConvertNone").prop("checked", true); val = "none";
 	}
 	tongwen["inputConvert"] = val;
 }
@@ -61,9 +61,9 @@ function symbolAction() {
 		val = true;
 	}
 	if (val) {
-		$("#symbolEnable").attr("checked", true);
+		$("#symbolEnable").prop("checked", true);
 	} else {
-		$("#symbolDisable").attr("checked", true);
+		$("#symbolDisable").prop("checked", true);
 	}
 	tongwen["symConvert"] = val;
 }
@@ -78,9 +78,9 @@ function fontAction() {
 		};
 		val = tongwen.fontCustom;
 	}
-	$("#fontEnable").attr("checked", val.enable);
-	$("#fontTrad").val(val.trad).attr("disabled", !val.enable);
-	$("#fontSimp").val(val.simp).attr("disabled", !val.enable);
+	$("#fontEnable").prop("checked", val.enable);
+	$("#fontTrad").val(val.trad).prop("disabled", !val.enable);
+	$("#fontSimp").val(val.simp).prop("disabled", !val.enable);
 	tongwen["fontCustom"] = val;
 }
 // 自訂詞彙
@@ -88,9 +88,9 @@ function phraseAction() {
 	var txt = "";
 	var val = tongwen.userPhrase.enable || false;
 	if (val) {
-		$("#enableCustomPhrase").attr("checked", true);
+		$("#enableCustomPhrase").prop("checked", true);
 	} else {
-		$("#enableCustomPhrase").removeAttr("checked");
+		$("#enableCustomPhrase").removeProp("checked");
 	}
 	// 繁體
 	txt = "";
@@ -115,9 +115,9 @@ function phraseAction() {
 function contextMenuAction() {
 	var val = tongwen.contextMenu.enable || false;
 	if (val) {
-		$("#enableContextMenu").attr("checked", true);
+		$("#enableContextMenu").prop("checked", true);
 	} else {
-		$("#enableContextMenu").removeAttr("checked");
+		$("#enableContextMenu").removeProp("checked");
 	}
 }
 // ----------------------------------------------------------------------
@@ -129,7 +129,7 @@ function saveOptions() {
 	tongwen.symConvert   = ($("#symbolEnable").length > 0) ? $("#symbolEnable").get(0).checked : false;
 	// 網址轉換規則
 	tongwen.urlFilter = {
-		"enable": $("#enableUrlFilter").attr("checked"),
+		"enable": $("#enableUrlFilter").prop("checked"),
 		"list"  : []
 //			{ "url": "", "zhflag": "none, trad, simp" }
 	};
@@ -140,17 +140,17 @@ function saveOptions() {
 	});
 	// 強制字型設定
 	tongwen.fontCustom = {
-		"enable" : $("#fontEnable").attr("checked"),
+		"enable" : $("#fontEnable").prop("checked"),
 		"trad"   : $("#fontTrad").val(),
 		"simp"   : $("#fontSimp").val()
 	};
 
 	// 自訂詞彙
 	tongwen.userPhrase = {
-		"enable": $("#enableCustomPhrase").attr("checked"),
+		"enable": $("#enableCustomPhrase").prop("checked"),
 		"trad"  : {},
 		"simp"  : {}
-	}
+	};
 	$("#tableTradList li:not(.disabled)").each(function () {
 		var simp = $(this).children("span.simp").attr("value");
 		var trad = $(this).children("span.trad").attr("value");
@@ -163,7 +163,7 @@ function saveOptions() {
 	});
 	// 右鍵選單
 	tongwen.contextMenu = {
-		"enable": $("#enableContextMenu").attr("checked")
+		"enable": $("#enableContextMenu").prop("checked")
 	};
 
 	// 回存
@@ -213,7 +213,7 @@ function ExportOptions(title, node, kind) {
 		$(this).dialog("close");
 	};
 	$("#msgNotice").html(messages.msgExportNotice);
-	$("#tongwenOptions").attr("readonly", "readonly").val(option).click(function () { this.select(); });
+	$("#tongwenOptions").prop("readonly", true).val(option).click(function () { this.select(); });
 	$("#msgInOutDialog").dialog("option", "title", title).dialog("option", "buttons", btnList).dialog("open");
 }
 
@@ -224,8 +224,8 @@ function ImportOptions(title, kind) {
 	$("#divReplace").show();
 
 	$("#msgNotice").html(messages.msgImportNotice);
-	$("#tongwenOptions").removeAttr("readonly").val("").click(function () {});
-	$("#ckReplace").removeAttr("checked");
+	$("#tongwenOptions").removeProp("readonly").val("").click(function () {});
+	$("#ckReplace").removeProp("checked");
 
 	btnList = {};
 	btnList[messages.btnCancel] = function () {
@@ -234,7 +234,7 @@ function ImportOptions(title, kind) {
 	btnList[messages.btnApply] = function () {
 		var val = null;
 		try {
-			var bol = $("#ckReplace").attr("checked");
+			var bol = $("#ckReplace").prop("checked");
 			var val = JSON.parse($("#tongwenOptions").val());
 
 			switch (kind) {
@@ -404,7 +404,7 @@ function uiUrlFilter() {
 		$(this).parent().hide();
 		$("#btnAddUrl").html('<span class="ui-button-text">' + messages.btnAdd + '</span>');
 		$("#urlAnchor").val("");
-		$("#tableUrlEdit input:radio[value=none]").attr("checked", true);
+		$("#tableUrlEdit input:radio[value=none]").prop("checked", true);
 	});
 	$("#tableUrlList .delete").live("click", function () {
 		$(this).parents("li").remove();
@@ -415,7 +415,7 @@ function uiUrlFilter() {
 		var val = $(this).parents("li").children("span.url").attr("value");
 		$("#urlAnchor").val(val);
 		val = $(this).parents("li").children("span.zhflag").attr("value");
-		$("#tableUrlEdit input:radio[value=" + val + "]").attr("checked", true);
+		$("#tableUrlEdit input:radio[value=" + val + "]").prop("checked", true);
 		$("#btnAddUrl").html('<span class="ui-button-text">' + messages.btnEdit + '</span>');
 		$("#btnCancel").parent().show();
 	});
@@ -626,8 +626,8 @@ $(function () {
 	.hide();
 
 	$("#fontEnable").click(function () {
-		$("#fontTrad").attr("disabled", !this.checked);
-		$("#fontSimp").attr("disabled", !this.checked);
+		$("#fontTrad").prop("disabled", !this.checked);
+		$("#fontSimp").prop("disabled", !this.checked);
 	});
 
 	$("#tabsTongwen, #tabUserPhrase").tabs();
