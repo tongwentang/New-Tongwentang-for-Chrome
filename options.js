@@ -8,188 +8,182 @@ var btnList = null;
 // ----------------------------------------------------------------------
 // 自動轉換設定
 function autoConvert() {
-	var val = tongwen.autoConvert || "none";
+	var val = tongwen.autoConvert || 'none';
 	switch (val) {
-		case "trad": $("#autoConvertTrad").prop("checked", true); break;
-		case "simp": $("#autoConvertSimp").prop("checked", true); break;
-		default    : $("#autoConvertNone").prop("checked", true); val = "none";
+		case 'trad': $('#autoConvertTrad').prop('checked', true); break;
+		case 'simp': $('#autoConvertSimp').prop('checked', true); break;
+		default    : $('#autoConvertNone').prop('checked', true); val = 'none';
 	}
-	tongwen["autoConvert"] = val;
+	tongwen.autoConvert = val;
 }
 // 圖示轉換設定值
 function iconAction() {
-	var val = tongwen.iconAction || "auto";
+	var val = tongwen.iconAction || 'auto';
 	switch (val) {
-		case "trad": $("#iconActionTrad").prop("checked", true); break;
-		case "simp": $("#iconActionSimp").prop("checked", true); break;
-		default    : $("#iconActionAuto").prop("checked", true); val = "auto";
+		case 'trad': $('#iconActionTrad').prop('checked', true); break;
+		case 'simp': $('#iconActionSimp').prop('checked', true); break;
+		default    : $('#iconActionAuto').prop('checked', true); val = 'auto';
 	}
-	tongwen["iconAction"] = val;
+	tongwen.iconAction = val;
 }
 // 網址轉換規則設定值
 function urlAction() {
-	var val = tongwen.urlFilter.enable || false;
-	if (val) {
-		$("#enableUrlFilter").prop("checked", true);
-	} else {
-		$("#enableUrlFilter").removeProp("checked");
-	}
+	var val, txt, i, c;
+
+	val = (typeof tongwen.urlFilter.enable === 'undefined') ? false : tongwen.urlFilter.enable;
+	$('#enableUrlFilter').prop('checked', val);
+
 	val = tongwen.urlFilter.list;
-	var txt = "";
-	for (var i = 0, c = val.length; i < c; i++) {
+	txt = '';
+	for (i = 0, c = val.length; i < c; i += 1) {
 		txt += '<li class="ui-state-default">';
 		txt += uiMakeUrlList(val[i].url, val[i].zhflag);
 		txt += '</li>';
 	}
-	$("#tableUrlList").append(txt);
+	$('#tableUrlList').append(txt);
 }
 // 輸入區轉換設定值
 function inputAction() {
-	var val = tongwen.inputConvert || "none";
+	var val = tongwen.inputConvert || 'none';
 	switch (val) {
-		case "auto": $("#inputConvertAuto").prop("checked", true); break;
-		case "trad": $("#inputConvertTrad").prop("checked", true); break;
-		case "simp": $("#inputConvertSimp").prop("checked", true); break;
-		default    : $("#inputConvertNone").prop("checked", true); val = "none";
+		case 'auto': $('#inputConvertAuto').prop('checked', true); break;
+		case 'trad': $('#inputConvertTrad').prop('checked', true); break;
+		case 'simp': $('#inputConvertSimp').prop('checked', true); break;
+		default    : $('#inputConvertNone').prop('checked', true); val = 'none';
 	}
-	tongwen["inputConvert"] = val;
+	tongwen.inputConvert = val;
 }
 // 標點符號轉換設定值
 function symbolAction() {
 	var val = tongwen.symConvert;
-	if (typeof tongwen.symConvert == "undefined") {
+	if (typeof tongwen.symConvert === 'undefined') {
 		val = true;
 	}
 	if (val) {
-		$("#symbolEnable").prop("checked", true);
+		$('#symbolEnable').prop('checked', true);
 	} else {
-		$("#symbolDisable").prop("checked", true);
+		$('#symbolDisable').prop('checked', true);
 	}
-	tongwen["symConvert"] = val;
+	tongwen.symConvert = val;
 }
 // 強制字型設定值
 function fontAction() {
 	var val = tongwen.fontCustom;
-	if (typeof tongwen.fontCustom == "undefined") {
+	if (typeof tongwen.fontCustom === 'undefined') {
 		tongwen.fontCustom = {
-			"enable" : false,
-			"trad"   : "PMingLiU,MingLiU,新細明體,細明體",
-			"simp"   : "MS Song,宋体,SimSun"
+			'enable' : false,
+			'trad'   : 'PMingLiU,MingLiU,新細明體,細明體',
+			'simp'   : 'MS Song,宋体,SimSun'
 		};
 		val = tongwen.fontCustom;
 	}
-	$("#fontEnable").prop("checked", val.enable);
-	$("#fontTrad").val(val.trad).prop("disabled", !val.enable);
-	$("#fontSimp").val(val.simp).prop("disabled", !val.enable);
-	tongwen["fontCustom"] = val;
+	$('#fontEnable').prop('checked', val.enable);
+	$('#fontTrad').val(val.trad).prop('disabled', !val.enable);
+	$('#fontSimp').val(val.simp).prop('disabled', !val.enable);
+	tongwen.fontCustom = val;
 }
 // 自訂詞彙
 function phraseAction() {
-	var txt = "";
-	var val = tongwen.userPhrase.enable || false;
-	if (val) {
-		$("#enableCustomPhrase").prop("checked", true);
-	} else {
-		$("#enableCustomPhrase").removeProp("checked");
-	}
+	var val, txt, i;
+
+	val = (typeof tongwen.userPhrase.enable === 'undefined') ? false : tongwen.userPhrase.enable;
+	$('#enableCustomPhrase').prop('checked', val);
+
 	// 繁體
-	txt = "";
+	txt = '';
 	val = tongwen.userPhrase.trad;
-	for (var i in val) {
+	for (i in val) {
 		txt += '<li class="ui-state-default">';
 		txt += uiMakeTradList(i, val[i]);
 		txt += '</li>';
 	}
-	$("#tableTradList").append(txt);
+	$('#tableTradList').append(txt);
 	// 簡體
-	txt = "";
+	txt = '';
 	val = tongwen.userPhrase.simp;
-	for (var i in val) {
+	for (i in val) {
 		txt += '<li class="ui-state-default">';
 		txt += uiMakeSimpList(val[i], i);
 		txt += '</li>';
 	}
-	$("#tableSimpList").append(txt);
+	$('#tableSimpList').append(txt);
 }
 // 右鍵選單
 function contextMenuAction() {
-	var val = tongwen.contextMenu.enable || false;
-	if (val) {
-		$("#enableContextMenu").prop("checked", true);
-	} else {
-		$("#enableContextMenu").removeProp("checked");
-	}
+	var val = (typeof tongwen.contextMenu.enable === 'undefined') ? false : tongwen.contextMenu.enable;
+	$('#enableContextMenu').prop('checked', val);
 }
 // ----------------------------------------------------------------------
 // 儲存設定
 function saveOptions() {
-	tongwen.iconAction   = $("input[name=iconAction]:checked").val();
-	tongwen.autoConvert  = $("input[name=autoConvert]:checked").val();
-	tongwen.inputConvert = $("input[name=inputConvert]:checked").val();
-	tongwen.symConvert   = ($("#symbolEnable").length > 0) ? $("#symbolEnable").get(0).checked : false;
+	tongwen.iconAction   = $('input[name=iconAction]:checked').val();
+	tongwen.autoConvert  = $('input[name=autoConvert]:checked').val();
+	tongwen.inputConvert = $('input[name=inputConvert]:checked').val();
+	tongwen.symConvert   = ($('#symbolEnable').length > 0) ? $('#symbolEnable').get(0).checked : false;
 	// 網址轉換規則
 	tongwen.urlFilter = {
-		"enable": $("#enableUrlFilter").prop("checked"),
-		"list"  : []
-//			{ "url": "", "zhflag": "none, trad, simp" }
+		'enable': $('#enableUrlFilter').prop('checked'),
+		'list'  : []
+//			{ 'url': '', 'zhflag': 'none, trad, simp' }
 	};
-	$("#tableUrlList li:not(.disabled)").each(function () {
-		var url    = $(this).children("span.url").attr("value");
-		var zhflag = $(this).children("span.zhflag").attr("value");
-		tongwen.urlFilter.list.push({ "url": url, "zhflag": zhflag });
+	$('#tableUrlList li:not(.disabled)').each(function () {
+		var url    = $(this).children('span.url').attr('value');
+		var zhflag = $(this).children('span.zhflag').attr('value');
+		tongwen.urlFilter.list.push({ 'url': url, 'zhflag': zhflag });
 	});
 	// 強制字型設定
 	tongwen.fontCustom = {
-		"enable" : $("#fontEnable").prop("checked"),
-		"trad"   : $("#fontTrad").val(),
-		"simp"   : $("#fontSimp").val()
+		'enable' : $('#fontEnable').prop('checked'),
+		'trad'   : $('#fontTrad').val(),
+		'simp'   : $('#fontSimp').val()
 	};
 
 	// 自訂詞彙
 	tongwen.userPhrase = {
-		"enable": $("#enableCustomPhrase").prop("checked"),
-		"trad"  : {},
-		"simp"  : {}
+		'enable': $('#enableCustomPhrase').prop('checked'),
+		'trad'  : {},
+		'simp'  : {}
 	};
-	$("#tableTradList li:not(.disabled)").each(function () {
-		var simp = $(this).children("span.simp").attr("value");
-		var trad = $(this).children("span.trad").attr("value");
+	$('#tableTradList li:not(.disabled)').each(function () {
+		var simp = $(this).children('span.simp').attr('value');
+		var trad = $(this).children('span.trad').attr('value');
 		tongwen.userPhrase.trad[simp] = trad;
 	});
-	$("#tableSimpList li:not(.disabled)").each(function () {
-		var simp = $(this).children("span.simp").attr("value");
-		var trad = $(this).children("span.trad").attr("value");
+	$('#tableSimpList li:not(.disabled)').each(function () {
+		var simp = $(this).children('span.simp').attr('value');
+		var trad = $(this).children('span.trad').attr('value');
 		tongwen.userPhrase.simp[trad] = simp;
 	});
 	// 右鍵選單
 	tongwen.contextMenu = {
-		"enable": $("#enableContextMenu").prop("checked")
+		'enable': $('#enableContextMenu').prop('checked')
 	};
 
+	console.log(tongwen);
 	// 回存
-	localStorage["tongwen"] = JSON.stringify(tongwen);
+	localStorage['tongwen'] = JSON.stringify(tongwen);
 
 	var bgPage = chrome.extension.getBackgroundPage();
 	bgPage.reloadConfig();
 	bgPage.iconActionStat();
 
 	// 顯示訊息
-	if (typeof timer == "number") clearTimeout(timer);
-	$("#msgBannerContent").html(messages.msgSaveSuccess);
-	$("#msgBanner").fadeIn("slow");
-	timer = setTimeout(function () { $("#msgBanner").fadeOut("slow"); }, 6000); // 6 秒後自動關閉訊息
+	if (typeof timer == 'number') clearTimeout(timer);
+	$('#msgBannerContent').html(messages.msgSaveSuccess);
+	$('#msgBanner').fadeIn('slow');
+	timer = setTimeout(function () { $('#msgBanner').fadeOut('slow'); }, 6000); // 6 秒後自動關閉訊息
 }
 
 // 取出設定
 function restoreOptions() {
-	tongwen = JSON.parse(localStorage["tongwen"]);
+	tongwen = JSON.parse(localStorage['tongwen']);
 	if (tongwen == null) {
 		tongwen = {};
 	}
 	// 清空資料
-	$("#tableUrlList li:not(.disabled)").remove();
-	$("#tableTradList li:not(.disabled)").remove();
-	$("#tableSimpList li:not(.disabled)").remove();
+	$('#tableUrlList li:not(.disabled)').remove();
+	$('#tableTradList li:not(.disabled)').remove();
+	$('#tableSimpList li:not(.disabled)').remove();
 
 	// 顯示資料
 	autoConvert();
@@ -204,41 +198,41 @@ function restoreOptions() {
 
 // 匯出設定
 function ExportOptions(title, node, kind) {
-	if (typeof timer == "number") clearTimeout(timer);
-	$("#divWarning, #divReplace").hide();
+	if (typeof timer == 'number') clearTimeout(timer);
+	$('#divWarning, #divReplace').hide();
 
 	var option = JSON.stringify(node);
 	btnList = {};
 	btnList[messages.btnClose] = function () {
-		$(this).dialog("close");
+		$(this).dialog('close');
 	};
-	$("#msgNotice").html(messages.msgExportNotice);
-	$("#tongwenOptions").prop("readonly", true).val(option).click(function () { this.select(); });
-	$("#msgInOutDialog").dialog("option", "title", title).dialog("option", "buttons", btnList).dialog("open");
+	$('#msgNotice').html(messages.msgExportNotice);
+	$('#tongwenOptions').prop('readonly', true).val(option).click(function () { this.select(); });
+	$('#msgInOutDialog').dialog('option', 'title', title).dialog('option', 'buttons', btnList).dialog('open');
 }
 
 // 匯入設定
 function ImportOptions(title, kind) {
-	if (typeof timer == "number") clearTimeout(timer);
-	$("#divWarning").hide();
-	$("#divReplace").show();
+	if (typeof timer == 'number') clearTimeout(timer);
+	$('#divWarning').hide();
+	$('#divReplace').show();
 
-	$("#msgNotice").html(messages.msgImportNotice);
-	$("#tongwenOptions").removeProp("readonly").val("").click(function () {});
-	$("#ckReplace").removeProp("checked");
+	$('#msgNotice').html(messages.msgImportNotice);
+	$('#tongwenOptions').removeProp('readonly').val('').click(function () {});
+	$('#ckReplace').removeProp('checked');
 
 	btnList = {};
 	btnList[messages.btnCancel] = function () {
-		$(this).dialog("close");
+		$(this).dialog('close');
 	};
 	btnList[messages.btnApply] = function () {
 		var val = null;
 		try {
-			var bol = $("#ckReplace").prop("checked");
-			var val = JSON.parse($("#tongwenOptions").val());
+			var bol = $('#ckReplace').prop('checked');
+			var val = JSON.parse($('#tongwenOptions').val());
 
 			switch (kind) {
-				case "all" :
+				case 'all' :
 					if (bol) {
 						if (val.urlFilter && val.urlFilter.list) {
 							tongwen.urlFilter.list = [];
@@ -251,10 +245,10 @@ function ImportOptions(title, kind) {
 						}
 					}
 					for (var i in val) {
-						if (i == "version") continue;
+						if (i == 'version') continue;
 						switch (i) {
-							case "urlFilter":
-								if (typeof val.urlFilter.enable != "undefined")
+							case 'urlFilter':
+								if (typeof val.urlFilter.enable != 'undefined')
 									tongwen.urlFilter.enable = val.urlFilter.enable;
 								if (val.urlFilter.list) {
 									for (var i = 0, c = val.urlFilter.list.length; i < c; i++) {
@@ -262,8 +256,8 @@ function ImportOptions(title, kind) {
 									}
 								}
 								break;
-							case "userPhrase":
-								if (typeof val.userPhrase.enable != "undefined")
+							case 'userPhrase':
+								if (typeof val.userPhrase.enable != 'undefined')
 									tongwen.userPhrase.enable = val.userPhrase.enable;
 								if (val.userPhrase.trad) {
 									for (var i in val.userPhrase.trad) {
@@ -281,264 +275,264 @@ function ImportOptions(title, kind) {
 						}
 					}
 					break;
-				case "url" :
+				case 'url' :
 					if (bol) tongwen.urlFilter.list = [];
 					for (var i = 0, c = val.length; i < c; i++) {
 						tongwen.urlFilter.list.push(val[i]);
 					}
 					break;
-				case "trad" :
+				case 'trad' :
 					if (bol) tongwen.userPhrase.trad = {};
 					for (var i in val) {
 						tongwen.userPhrase.trad[i] = val[i];
 					}
 					break;
-				case "simp" :
+				case 'simp' :
 					if (bol) tongwen.userPhrase.simp = {};
 					for (var i in val) {
 						tongwen.userPhrase.simp[i] = val[i];
 					}
 					break;
 			}
-			// val = JSON.parse($("#tongwenOptions").val());
+			// val = JSON.parse($('#tongwenOptions').val());
 			// 回存
-			localStorage["tongwen"] = JSON.stringify(tongwen);
+			localStorage['tongwen'] = JSON.stringify(tongwen);
 			restoreOptions();
-			$(this).dialog("close");
+			$(this).dialog('close');
 
-			if (typeof timer == "number") clearTimeout(timer);
-			$("#msgBannerContent").html(messages.msgImportSuccess);
-			$("#msgBanner").fadeIn("slow");
-			timer = setTimeout(function () { $("#msgBanner").fadeOut("slow"); }, 6000); // 6 秒後自動關閉訊息
+			if (typeof timer == 'number') clearTimeout(timer);
+			$('#msgBannerContent').html(messages.msgImportSuccess);
+			$('#msgBanner').fadeIn('slow');
+			timer = setTimeout(function () { $('#msgBanner').fadeOut('slow'); }, 6000); // 6 秒後自動關閉訊息
 		} catch (ex) {
-			$("#divWarning").fadeIn("slow");
-			$("#msgWarning").html(messages.msgImportFailed);
-			timer = setTimeout(function () { $("#divWarning").fadeOut("slow"); }, 6000); // 6 秒後自動關閉訊息
+			$('#divWarning').fadeIn('slow');
+			$('#msgWarning').html(messages.msgImportFailed);
+			timer = setTimeout(function () { $('#divWarning').fadeOut('slow'); }, 6000); // 6 秒後自動關閉訊息
 		}
 	};
 
-	$("#msgInOutDialog").dialog("option", "title", title).dialog("option", "buttons", btnList).dialog("open");
+	$('#msgInOutDialog').dialog('option', 'title', title).dialog('option', 'buttons', btnList).dialog('open');
 }
 
 // ----------------------------------------------------------------------
 function uiMackList(kind, v1, v2) {
-	var data = "";
+	var data = '';
 	switch (kind) {
-		case "url":
+		case 'url':
 			data += '<span class="url" value="' + v1 + '" title="' + v1 + '">' + v1 + '</span>';
 			data += '<span class="zhflag center" value="' + v2 + '" title="' + flagmap[v2] + '">' + flagmap[v2] + '</span>';
 			break;
-		case "trad":
+		case 'trad':
 			data += '<span class="simp" value="' + v1 + '" title="' + v1 + '">' + v1 + '</span>';
 			data += '<span class="trad" value="' + v2 + '" title="' + v2 + '">' + v2 + '</span>';
 			break;
-		case "simp":
+		case 'simp':
 			data += '<span class="trad" value="' + v2 + '" title="' + v2 + '">' + v2 + '</span>';
 			data += '<span class="simp" value="' + v1 + '" title="' + v1 + '">' + v1 + '</span>';
 			break;
 		default:
-			return "";
+			return '';
 	}
 	data += '<span class="icon ui-state-default right"><span class="ui-icon icon-cross delete" title="' + messages.btnDelete + '"></span></span>';
 	data += '<span class="icon ui-state-default right"><span class="ui-icon icon-pencil edit" title="' + messages.btnEdit + '"></span></span>';
 	return data;
 }
 function uiMakeUrlList(url, zhflag) {
-	return uiMackList("url", url, zhflag);
+	return uiMackList('url', url, zhflag);
 }
 function uiMakeTradList(simp, trad) {
-	return uiMackList("trad", simp, trad);
+	return uiMackList('trad', simp, trad);
 }
 function uiMakeSimpList(simp, trad) {
-	return uiMackList("simp", simp, trad);
+	return uiMackList('simp', simp, trad);
 }
 
 function uiUrlFilter() {
 	// 網址自訂轉換規則
-	$("#tableUrlList li:not(.disabled), #tableUrlList li span.icon").live("mouseover", function () {
-		$(this).addClass("ui-state-hover");
-	}).live("mouseout", function () {
-		$(this).removeClass("ui-state-hover");
+	$('#tableUrlList li:not(.disabled), #tableUrlList li span.icon').live('mouseover', function () {
+		$(this).addClass('ui-state-hover');
+	}).live('mouseout', function () {
+		$(this).removeClass('ui-state-hover');
 	});
-	$("#btnAddUrl, #btnCancel").hover(
-		function () { $(this).addClass("ui-state-hover"); },
-		function () { $(this).removeClass("ui-state-hover"); }
+	$('#btnAddUrl, #btnCancel').hover(
+		function () { $(this).addClass('ui-state-hover'); },
+		function () { $(this).removeClass('ui-state-hover'); }
 	);
 	// 匯出
-	$("#tableUrlList li.disabled span.icon-export").click(function () {
-		ExportOptions(messages.dlgExportRules, tongwen.urlFilter.list, "url");
+	$('#tableUrlList li.disabled span.icon-export').click(function () {
+		ExportOptions(messages.dlgExportRules, tongwen.urlFilter.list, 'url');
 	});
 	// 匯入
-	$("#tableUrlList li.disabled span.icon-import").click(function () {
-		ImportOptions(messages.dlgImportRules, "url");
+	$('#tableUrlList li.disabled span.icon-import').click(function () {
+		ImportOptions(messages.dlgImportRules, 'url');
 	});
-	$("#btnAddUrl").click(function () {
-		var data = "";
-		var url = $.trim($("#urlAnchor").val());
-		var zhflag = $("#tableUrlEdit input:radio:checked").val();
-		if (url == "") {
-			$("#msgContent").html(messages.msgUrlNotEmpty);
+	$('#btnAddUrl').click(function () {
+		var data = '';
+		var url = $.trim($('#urlAnchor').val());
+		var zhflag = $('#tableUrlEdit input:radio:checked').val();
+		if (url == '') {
+			$('#msgContent').html(messages.msgUrlNotEmpty);
 			btnList = {};
 			btnList[messages.btnOK] = function () {
-				$(this).dialog("close");
-				$("#urlAnchor").focus();
+				$(this).dialog('close');
+				$('#urlAnchor').focus();
 			};
-			$("#msgDialog")
-				.dialog("option", "title", messages.dlgWarning)
-				.dialog("option", "width", 300)
-				.dialog("option", "buttons", btnList)
-				.dialog("open");
+			$('#msgDialog')
+				.dialog('option', 'title', messages.dlgWarning)
+				.dialog('option', 'width', 300)
+				.dialog('option', 'buttons', btnList)
+				.dialog('open');
 			return;
 		}
 		data = uiMakeUrlList(url, zhflag);
 		if (nowEditUrl == null) {
 			data = '<li class="ui-state-default">' + data + '</li>';
-			$("#tableUrlList").append(data);
+			$('#tableUrlList').append(data);
 		} else {
 			nowEditUrl.html(data);
 		}
-		$("#btnCancel").trigger("click");
+		$('#btnCancel').trigger('click');
 	});
-	$("#btnCancel").click(function () {
+	$('#btnCancel').click(function () {
 		nowEditUrl = null;
 		$(this).parent().hide();
-		$("#btnAddUrl").html('<span class="ui-button-text">' + messages.btnAdd + '</span>');
-		$("#urlAnchor").val("");
-		$("#tableUrlEdit input:radio[value=none]").prop("checked", true);
+		$('#btnAddUrl').html('<span class="ui-button-text">' + messages.btnAdd + '</span>');
+		$('#urlAnchor').val('');
+		$('#tableUrlEdit input:radio[value=none]').prop('checked', true);
 	});
-	$("#tableUrlList .delete").live("click", function () {
-		$(this).parents("li").remove();
-		if (nowEditUrl != null) $("#btnCancel").trigger("click");
+	$('#tableUrlList .delete').live('click', function () {
+		$(this).parents('li').remove();
+		if (nowEditUrl != null) $('#btnCancel').trigger('click');
 	});
-	$("#tableUrlList .edit").live("click", function () {
-		nowEditUrl = $(this).parents("li");
-		var val = $(this).parents("li").children("span.url").attr("value");
-		$("#urlAnchor").val(val);
-		val = $(this).parents("li").children("span.zhflag").attr("value");
-		$("#tableUrlEdit input:radio[value=" + val + "]").prop("checked", true);
-		$("#btnAddUrl").html('<span class="ui-button-text">' + messages.btnEdit + '</span>');
-		$("#btnCancel").parent().show();
+	$('#tableUrlList .edit').live('click', function () {
+		nowEditUrl = $(this).parents('li');
+		var val = $(this).parents('li').children('span.url').attr('value');
+		$('#urlAnchor').val(val);
+		val = $(this).parents('li').children('span.zhflag').attr('value');
+		$('#tableUrlEdit input:radio[value=' + val + ']').prop('checked', true);
+		$('#btnAddUrl').html('<span class="ui-button-text">' + messages.btnEdit + '</span>');
+		$('#btnCancel').parent().show();
 	});
 }
 
 function uiUserPhrase() {
 	// 自定詞彙
-	$("#tabsPhrase li:not(.disabled), #tabsPhrase li span.icon").live("mouseover", function () {
-		$(this).addClass("ui-state-hover");
+	$('#tabsPhrase li:not(.disabled), #tabsPhrase li span.icon').live('mouseover', function () {
+		$(this).addClass('ui-state-hover');
 	});
-	$("#tabsPhrase li:not(.disabled), #tabsPhrase li span.icon").live("mouseout", function () {
-		$(this).removeClass("ui-state-hover");
+	$('#tabsPhrase li:not(.disabled), #tabsPhrase li span.icon').live('mouseout', function () {
+		$(this).removeClass('ui-state-hover');
 	});
-	$("#btnAddTrad, #btnTradCancel, #btnAddSimp, #btnSimpCancel").hover(
-		function () { $(this).addClass("ui-state-hover"); },
-		function () { $(this).removeClass("ui-state-hover"); }
+	$('#btnAddTrad, #btnTradCancel, #btnAddSimp, #btnSimpCancel').hover(
+		function () { $(this).addClass('ui-state-hover'); },
+		function () { $(this).removeClass('ui-state-hover'); }
 	);
-	$("#tabsPhrase .delete").live("click", function () {
-		$(this).parents("li").remove();
-		if (nowEditTrad != null) $("#btnTradCancel").trigger("click");
-		if (nowEditSimp != null) $("#btnSimpCancel").trigger("click");
+	$('#tabsPhrase .delete').live('click', function () {
+		$(this).parents('li').remove();
+		if (nowEditTrad != null) $('#btnTradCancel').trigger('click');
+		if (nowEditSimp != null) $('#btnSimpCancel').trigger('click');
 	});
 	// 繁體
 	// 匯出
-	$("#tableTradList li.disabled span.icon-export").click(function () {
-		ExportOptions(messages.dlgExportPhraseTrad, tongwen.userPhrase.trad, "trad");
+	$('#tableTradList li.disabled span.icon-export').click(function () {
+		ExportOptions(messages.dlgExportPhraseTrad, tongwen.userPhrase.trad, 'trad');
 	});
 	// 匯入
-	$("#tableTradList li.disabled span.icon-import").click(function () {
-		ImportOptions(messages.dlgImportPhraseTrad, "trad");
+	$('#tableTradList li.disabled span.icon-import').click(function () {
+		ImportOptions(messages.dlgImportPhraseTrad, 'trad');
 	});
-	$("#tableTradList .edit").live("click", function () {
-		nowEditTrad = $(this).parents("li");
-		var val = $(this).parents("li").children("span.simp").attr("value");
-		$("#tradSimp").val(val);
-		val = $(this).parents("li").children("span.trad").attr("value");
-		$("#tradTrad").val(val);
-		$("#btnAddTrad").html('<span class="ui-button-text">' + messages.btnEdit + '</span>');
-		$("#btnTradCancel").parent().show();
+	$('#tableTradList .edit').live('click', function () {
+		nowEditTrad = $(this).parents('li');
+		var val = $(this).parents('li').children('span.simp').attr('value');
+		$('#tradSimp').val(val);
+		val = $(this).parents('li').children('span.trad').attr('value');
+		$('#tradTrad').val(val);
+		$('#btnAddTrad').html('<span class="ui-button-text">' + messages.btnEdit + '</span>');
+		$('#btnTradCancel').parent().show();
 	});
-	$("#btnAddTrad").click(function () {
-		var data = "";
-		var simp = $.trim($("#tradSimp").val());
-		var trad = $.trim($("#tradTrad").val());
-		if (simp == "") {
+	$('#btnAddTrad').click(function () {
+		var data = '';
+		var simp = $.trim($('#tradSimp').val());
+		var trad = $.trim($('#tradTrad').val());
+		if (simp == '') {
 			btnList = {};
 			btnList[messages.btnOK] = function () {
-				$(this).dialog("close");
-				$("#tradSimp").focus();
+				$(this).dialog('close');
+				$('#tradSimp').focus();
 			};
-			$("#msgContent").html(messages.msgPhraseNotEmpty);
-			$("#msgDialog")
-				.dialog("option", "title", messages.dlgWarning)
-				.dialog("option", "width", 300)
-				.dialog("option", "buttons", btnList)
-				.dialog("open");
+			$('#msgContent').html(messages.msgPhraseNotEmpty);
+			$('#msgDialog')
+				.dialog('option', 'title', messages.dlgWarning)
+				.dialog('option', 'width', 300)
+				.dialog('option', 'buttons', btnList)
+				.dialog('open');
 			return;
 		}
 		data = uiMakeTradList(simp, trad);
 		if (nowEditTrad == null) {
 			data = '<li class="ui-state-default">' + data + '</li>';
-			$("#tableTradList").append(data);
+			$('#tableTradList').append(data);
 		} else {
 			nowEditTrad.html(data);
 		}
-		$("#btnTradCancel").trigger("click");
+		$('#btnTradCancel').trigger('click');
 	});
-	$("#btnTradCancel").click(function () {
+	$('#btnTradCancel').click(function () {
 		nowEditTrad = null;
 		$(this).parent().hide();
-		$("#btnAddTrad").html('<span class="ui-button-text">' + messages.btnAdd + '</span>');
-		$("#tradSimp, #tradTrad").val("");
+		$('#btnAddTrad').html('<span class="ui-button-text">' + messages.btnAdd + '</span>');
+		$('#tradSimp, #tradTrad').val('');
 	});
 	// 簡體
 	// 匯出
-	$("#tableSimpList li.disabled span.icon-export").click(function () {
-		ExportOptions(messages.dlgExportPhraseSimp, tongwen.userPhrase.simp, "simp");
+	$('#tableSimpList li.disabled span.icon-export').click(function () {
+		ExportOptions(messages.dlgExportPhraseSimp, tongwen.userPhrase.simp, 'simp');
 	});
 	// 匯入
-	$("#tableSimpList li.disabled span.icon-import").click(function () {
-		ImportOptions(messages.dlgImportPhraseSimp, "simp");
+	$('#tableSimpList li.disabled span.icon-import').click(function () {
+		ImportOptions(messages.dlgImportPhraseSimp, 'simp');
 	});
-	$("#tableSimpList .edit").live("click", function () {
-		nowEditSimp = $(this).parents("li");
-		var val = $(this).parents("li").children("span.simp").attr("value");
-		$("#simpSimp").val(val);
-		val = $(this).parents("li").children("span.trad").attr("value");
-		$("#simpTrad").val(val);
-		$("#btnAddSimp").html('<span class="ui-button-text">' + messages.btnEdit + '</span>');
-		$("#btnSimpCancel").parent().show();
+	$('#tableSimpList .edit').live('click', function () {
+		nowEditSimp = $(this).parents('li');
+		var val = $(this).parents('li').children('span.simp').attr('value');
+		$('#simpSimp').val(val);
+		val = $(this).parents('li').children('span.trad').attr('value');
+		$('#simpTrad').val(val);
+		$('#btnAddSimp').html('<span class="ui-button-text">' + messages.btnEdit + '</span>');
+		$('#btnSimpCancel').parent().show();
 	});
-	$("#btnAddSimp").click(function () {
-		var data = "";
-		var simp = $.trim($("#simpSimp").val());
-		var trad = $.trim($("#simpTrad").val());
-		if (trad == "") {
+	$('#btnAddSimp').click(function () {
+		var data = '';
+		var simp = $.trim($('#simpSimp').val());
+		var trad = $.trim($('#simpTrad').val());
+		if (trad == '') {
 			btnList = {};
 			btnList[messages.btnOK] = function () {
-				$(this).dialog("close");
-				$("#simpTrad").focus();
+				$(this).dialog('close');
+				$('#simpTrad').focus();
 			};
-			$("#msgContent").html(messages.msgPhraseNotEmpty);
-			$("#msgDialog")
-				.dialog("option", "title", messages.dlgWarning)
-				.dialog("option", "width", 300)
-				.dialog("option", "buttons", btnList)
-				.dialog("open");
+			$('#msgContent').html(messages.msgPhraseNotEmpty);
+			$('#msgDialog')
+				.dialog('option', 'title', messages.dlgWarning)
+				.dialog('option', 'width', 300)
+				.dialog('option', 'buttons', btnList)
+				.dialog('open');
 			return;
 		}
 		data = uiMakeSimpList(simp, trad);
 		if (nowEditSimp == null) {
 			data = '<li class="ui-state-default">' + data + '</li>';
-			$("#tableSimpList").append(data);
+			$('#tableSimpList').append(data);
 		} else {
 			nowEditSimp.html(data);
 		}
-		$("#btnSimpCancel").trigger("click");
+		$('#btnSimpCancel').trigger('click');
 	});
-	$("#btnSimpCancel").click(function () {
+	$('#btnSimpCancel').click(function () {
 		nowEditSimp = null;
 		$(this).parent().hide();
-		$("#btnAddSimp").html('<span class="ui-button-text">' + messages.btnAdd + '</span>');
-		$("#simpSimp, #simpTrad").val("");
+		$('#btnAddSimp').html('<span class="ui-button-text">' + messages.btnAdd + '</span>');
+		$('#simpSimp, #simpTrad').val('');
 	});
 }
 // ----------------------------------------------------------------------
@@ -559,9 +553,9 @@ function loadLang() {
 	}
 
 	flagmap = {
-		"none" : messages.labelNoTranslate,
-		"trad" : messages.labelToTraditional,
-		"simp" : messages.labelToSimplified
+		'none' : messages.labelNoTranslate,
+		'trad' : messages.labelToTraditional,
+		'simp' : messages.labelToSimplified
 	};
 
 	document.title = messages.optionTitle;
@@ -595,10 +589,10 @@ $(function () {
 
 	btnList = {};
 	btnList[messages.btnExportOptions] = function () {
-		ExportOptions(messages.dlgExportOption, tongwen, "all");
+		ExportOptions(messages.dlgExportOption, tongwen, 'all');
 	};
 	btnList[messages.btnImportOptions] = function () {
-		ImportOptions(messages.dlgImportOption, "all");
+		ImportOptions(messages.dlgImportOption, 'all');
 	};
 	btnList[messages.btnSave]   = function () {
 		saveOptions();
@@ -607,9 +601,9 @@ $(function () {
 		window.close();
 	};
 
-	$("#tongwenWrap").dialog({
+	$('#tongwenWrap').dialog({
 		modal    : false,
-		position : "top",
+		position : 'top',
 		draggable: false,
 		resizable: false,
 		title    : messages.optionTitle,
@@ -621,25 +615,25 @@ $(function () {
 	});
 
 	// 隱藏關閉按鈕 並 顯示版本資訊
-	$("div[aria-labelledby=ui-dialog-title-tongwenWrap] a.ui-dialog-titlebar-close")
+	$('div[aria-labelledby=ui-dialog-title-tongwenWrap] a.ui-dialog-titlebar-close')
 	.before('<span class="ui-dialog-title right">' + messages.optionVersion + tongwen.version + '</span>')
 	.hide();
 
-	$("#fontEnable").click(function () {
-		$("#fontTrad").prop("disabled", !this.checked);
-		$("#fontSimp").prop("disabled", !this.checked);
+	$('#fontEnable').click(function () {
+		$('#fontTrad').prop('disabled', !this.checked);
+		$('#fontSimp').prop('disabled', !this.checked);
 	});
 
-	$("#tabsTongwen, #tabUserPhrase").tabs();
-	$("#tableUrlList").sortable({
-		cursor: "move",
-		placeholder: "ui-state-highlight",
-		items: "li:not(.disabled)"
+	$('#tabsTongwen, #tabUserPhrase').tabs();
+	$('#tableUrlList').sortable({
+		cursor: 'move',
+		placeholder: 'ui-state-highlight',
+		items: 'li:not(.disabled)'
 	});
 
 	btnList = {};
-	btnList[messages.btnClose]  = function() { $(this).dialog("close"); };
-	$("#msgDialog").dialog({
+	btnList[messages.btnClose]  = function() { $(this).dialog('close'); };
+	$('#msgDialog').dialog({
 		autoOpen : false,
 		modal    : true,
 		width    : 300,
@@ -649,9 +643,9 @@ $(function () {
 
 	btnList = {};
 	btnList[messages.btnClose]  = function() {
-		$(this).dialog("close");
+		$(this).dialog('close');
 	};
-	$("#msgInOutDialog, #msgLoginDialog").dialog({
+	$('#msgInOutDialog, #msgLoginDialog').dialog({
 		autoOpen : false,
 		modal    : true,
 		width    : 460,

@@ -98,8 +98,10 @@ window.addEventListener('load', function (event) {
 			baseURI: document.baseURI
 		},
 		function (response) {
-			if (response !== 'none') {
-				TongWen.transPage(document, response);
+			if (response === 'trad') {
+				TongWen.trans2Trad(document);
+			} else if (response === 'simp') {
+				TongWen.trans2Simp(document);
 			}
 		}
 	);
