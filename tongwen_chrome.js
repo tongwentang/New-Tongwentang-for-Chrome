@@ -95,7 +95,7 @@ window.addEventListener('load', function (event) {
 	chrome.extension.sendRequest(
 		{
 			reqtype: 'loaded',
-			baseURI: document.baseURI
+			baseURI: document.URL
 		},
 		function (response) {
 			if (response === 'trad') {
