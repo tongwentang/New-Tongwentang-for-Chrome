@@ -159,7 +159,6 @@ function saveOptions() {
 		'enable': $('#enableContextMenu').prop('checked')
 	};
 
-	console.log(tongwen);
 	// 回存
 	localStorage['tongwen'] = JSON.stringify(tongwen);
 
