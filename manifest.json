@@ -1,6 +1,7 @@
 {
-	"name"       : "__MSG_extName__",
-	"version"    : "1.0.2",
+	"name"            : "__MSG_extName__",
+	"version"         : "1.0.3",
+    "manifest_version": 2,
 
 	"description": "__MSG_extDescription__",
 	"icons": {
@@ -14,6 +15,10 @@
 	"browser_action" : {
 		"default_title": "__MSG_extTitle__",
 		"default_icon" : "tongwen.png"
+	},
+
+	"background"     : {
+		"page": "background.html"
 	},
 
 	"content_scripts": [
@@ -34,9 +39,10 @@
 			"all_frames": true
 		}
 	],
+	"minimum_chrome_version": "18",
 
+	"offline_enabled": true,
 	"options_page": "options.html",
-	"background_page": "background.html",
 	"permissions": [
 		"http://*/*",
 		"https://*/*",
