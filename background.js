@@ -166,11 +166,11 @@ function contextMenuAction() {
 	});
 }
 
-window.onload = function () {
-	mergeConfig();
-	iconActionStat();
-	contextMenuAction();
-};
+window.addEventListener('DOMContentLoaded', function (event) {
+    mergeConfig();
+    iconActionStat();
+    contextMenuAction();
+});
 
 // Called when the user clicks on the browser action.
 chrome.browserAction.onClicked.addListener(function(tab) {
@@ -178,15 +178,10 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 });
 
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-	switch (request.reqtype) {
-		case 'init': // 初始化
-			tongwen.symbolS2T = symbolS2T;
-			tongwen.symbolT2S = symbolT2S;
-			sendResponse(tongwen);
-			break;
-		case "loaded": // 網址過濾規則與自動轉換
-			var zhflag = docLoadedInit(request.baseURI);
-			sendResponse(zhflag);
-			break;
-	}
+    // 初始化
+    // 網址過濾規則與自動轉換
+    var zhflag = docLoadedInit(request.docURL);
+    tongwen.symbolS2T = symbolS2T;
+    tongwen.symbolT2S = symbolT2S;
+    sendResponse([tongwen, zhflag]);
 });
