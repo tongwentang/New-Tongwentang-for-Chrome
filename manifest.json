@@ -48,7 +48,6 @@
         "https://*/*",
         "tabs",
         "contextMenus",
-        "webNavigation",
         "clipboardRead",
         "clipboardWrite"
     ]
