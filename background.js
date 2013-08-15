@@ -65,7 +65,7 @@ function contextMenuAction() {
 	chrome.contextMenus.create({
 		'parentId' : pmenuID,
 		'type'     : 'normal',
-		'title'    : '輸入區：轉 繁體',
+		'title'    : chrome.i18n.getMessage('contextInput2Trad'),
 		'contexts' : ['editable'],
 		'onclick'  : function () {
 			chrome.windows.getCurrent(function (win) {
@@ -80,7 +80,7 @@ function contextMenuAction() {
 	chrome.contextMenus.create({
 		'parentId' : pmenuID,
 		'type'     : 'normal',
-		'title'    : '輸入區：轉 簡體',
+		'title'    : chrome.i18n.getMessage('contextInput2Simp'),
 		'contexts' : ['editable'],
 		'onclick'  : function () {
 			chrome.windows.getCurrent(function (win) {
@@ -100,7 +100,7 @@ function contextMenuAction() {
 	chrome.contextMenus.create({
 		'parentId' : pmenuID,
 		'type'     : 'normal',
-		'title'    : '網頁：轉 繁體',
+		'title'    : chrome.i18n.getMessage('contextPage2Trad'),
 		'contexts' : ['all'],
 		'onclick'  : function () {
 			chrome.windows.getCurrent(function (win) {
@@ -115,7 +115,7 @@ function contextMenuAction() {
 	chrome.contextMenus.create({
 		'parentId' : pmenuID,
 		'type'     : 'normal',
-		'title'    : '網頁：轉 簡體',
+		'title'    : chrome.i18n.getMessage('contextPage2Simp'),
 		'contexts' : ['all'],
 		'onclick'  : function () {
 			chrome.windows.getCurrent(function (win) {
@@ -135,7 +135,7 @@ function contextMenuAction() {
 	chrome.contextMenus.create({
 		'parentId' : pmenuID,
 		'type'     : 'normal',
-		'title'    : '剪貼簿：轉 繁體',
+		'title'    : chrome.i18n.getMessage('contextClip2Trad'),
 		'contexts' : ['all'],
 		'onclick'  : function () {
 			chrome.windows.getCurrent(function (win) {
@@ -151,7 +151,7 @@ function contextMenuAction() {
 	chrome.contextMenus.create({
 		'parentId' : pmenuID,
 		'type'     : 'normal',
-		'title'    : '剪貼簿：轉 簡體',
+		'title'    : chrome.i18n.getMessage('contextClip2Simp'),
 		'contexts' : ['all'],
 		'onclick'  : function () {
 			chrome.windows.getCurrent(function (win) {

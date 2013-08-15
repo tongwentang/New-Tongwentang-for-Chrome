@@ -321,6 +321,36 @@
 		"description": ""
 	},
 
+	"contextInput2Trad": {
+		"message": "輸入區：轉 繁體",
+		"description": ""
+	},
+
+	"contextInput2Simp": {
+		"message": "輸入區：轉 簡體",
+		"description": ""
+	},
+
+	"contextPage2Trad": {
+		"message": "網頁：轉 繁體",
+		"description": ""
+	},
+
+	"contextPage2Simp": {
+		"message": "網頁：轉 簡體",
+		"description": ""
+	},
+
+	"contextClip2Trad": {
+		"message": "剪貼簿：轉 繁體",
+		"description": ""
+	},
+
+	"contextClip2Simp": {
+		"message": "剪貼簿：轉 簡體",
+		"description": ""
+	},
+
 	"empty": {
 		"message": "",
 		"description": ""

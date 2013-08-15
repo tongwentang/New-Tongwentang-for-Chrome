@@ -321,6 +321,36 @@
 		"description": ""
 	},
 
+	"contextInput2Trad": {
+		"message": "输入区：转 繁体",
+		"description": ""
+	},
+
+	"contextInput2Simp": {
+		"message": "输入区：转 简体",
+		"description": ""
+	},
+
+	"contextPage2Trad": {
+		"message": "网页：转 繁体",
+		"description": ""
+	},
+
+	"contextPage2Simp": {
+		"message": "网页：转 简体",
+		"description": ""
+	},
+
+	"contextClip2Trad": {
+		"message": "剪贴板：转 繁体",
+		"description": ""
+	},
+
+	"contextClip2Simp": {
+		"message": "剪贴板：转 简体",
+		"description": ""
+	},
+
 	"empty": {
 		"message": "",
 		"description": ""

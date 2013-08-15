@@ -321,6 +321,36 @@
 		"description": ""
 	},
 
+	"contextInput2Trad": {
+		"message": "Textarea: to Traditional",
+		"description": ""
+	},
+
+	"contextInput2Simp": {
+		"message": "Textarea: to Simplified",
+		"description": ""
+	},
+
+	"contextPage2Trad": {
+		"message": "Web Page: to Traditional",
+		"description": ""
+	},
+
+	"contextPage2Simp": {
+		"message": "Web Page: to Simplified",
+		"description": ""
+	},
+
+	"contextClip2Trad": {
+		"message": "Clipboard: to Traditional",
+		"description": ""
+	},
+
+	"contextClip2Simp": {
+		"message": "Clipboard: to Simplified",
+		"description": ""
+	},
+
 	"empty": {
 		"message": "",
 		"description": ""
