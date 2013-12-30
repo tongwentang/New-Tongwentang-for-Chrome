@@ -41,6 +41,7 @@ function doAction(tabId, act, flag, url, data) {
 
 // 設定圖示上的文字
 function iconActionStat() {
+	chrome.browserAction.setBadgeBackgroundColor({'color': '#C0C0C0'});
 	switch (tongwen.iconAction) {
 		case 'trad': chrome.browserAction.setBadgeText({'text': 'T'}); break;
 		case 'simp': chrome.browserAction.setBadgeText({'text': 'S'}); break;
