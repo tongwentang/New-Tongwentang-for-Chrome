@@ -1,4 +1,4 @@
-tongwen.version = '1.0.3.3'; // 版本
+tongwen.version = '1.0.3.4'; // 版本
 
 function getClipData() {
 	var node = document.getElementById('clipdata');
