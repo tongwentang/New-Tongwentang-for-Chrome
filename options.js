@@ -348,11 +348,13 @@ function uiMakeSimpList(simp, trad) {
 
 function uiUrlFilter() {
 	// 網址自訂轉換規則
-	$('#tableUrlList li:not(.disabled), #tableUrlList li span.icon').live('mouseover', function () {
-		$(this).addClass('ui-state-hover');
-	}).live('mouseout', function () {
-		$(this).removeClass('ui-state-hover');
-	});
+	$(document)
+		.on('mouseover', '#tableUrlList li:not(.disabled), #tableUrlList li span.icon', function () {
+			$(this).addClass('ui-state-hover');
+		})
+		.on('mouseout', '#tableUrlList li:not(.disabled), #tableUrlList li span.icon', function () {
+			$(this).removeClass('ui-state-hover');
+		});
 	$('#btnAddUrl, #btnCancel').hover(
 		function () { $(this).addClass('ui-state-hover'); },
 		function () { $(this).removeClass('ui-state-hover'); }
@@ -399,11 +401,11 @@ function uiUrlFilter() {
 		$('#urlAnchor').val('');
 		$('#tableUrlEdit input:radio[value=none]').prop('checked', true);
 	});
-	$('#tableUrlList .delete').live('click', function () {
+	$(document).on('click', '#tableUrlList .delete', function () {
 		$(this).parents('li').remove();
 		if (nowEditUrl != null) $('#btnCancel').trigger('click');
 	});
-	$('#tableUrlList .edit').live('click', function () {
+	$(document).on('click', '#tableUrlList .edit', function () {
 		nowEditUrl = $(this).parents('li');
 		var val = $(this).parents('li').children('span.url').attr('value');
 		$('#urlAnchor').val(val);
@@ -416,17 +418,18 @@ function uiUrlFilter() {
 
 function uiUserPhrase() {
 	// 自定詞彙
-	$('#tabsPhrase li:not(.disabled), #tabsPhrase li span.icon').live('mouseover', function () {
-		$(this).addClass('ui-state-hover');
-	});
-	$('#tabsPhrase li:not(.disabled), #tabsPhrase li span.icon').live('mouseout', function () {
-		$(this).removeClass('ui-state-hover');
-	});
+	$(document)
+		.on('mouseover', '#tabsPhrase li:not(.disabled), #tabsPhrase li span.icon', function () {
+			$(this).addClass('ui-state-hover');
+		})
+		.on('mouseout', '#tabsPhrase li:not(.disabled), #tabsPhrase li span.icon', function () {
+			$(this).removeClass('ui-state-hover');
+		});
 	$('#btnAddTrad, #btnTradCancel, #btnAddSimp, #btnSimpCancel').hover(
 		function () { $(this).addClass('ui-state-hover'); },
 		function () { $(this).removeClass('ui-state-hover'); }
 	);
-	$('#tabsPhrase .delete').live('click', function () {
+	$(document).on('click', '#tabsPhrase .delete', function () {
 		$(this).parents('li').remove();
 		if (nowEditTrad != null) $('#btnTradCancel').trigger('click');
 		if (nowEditSimp != null) $('#btnSimpCancel').trigger('click');
@@ -440,7 +443,7 @@ function uiUserPhrase() {
 	$('#tableTradList li.disabled span.icon-import').click(function () {
 		ImportOptions(messages.dlgImportPhraseTrad, 'trad');
 	});
-	$('#tableTradList .edit').live('click', function () {
+	$(document).on('click', '#tableTradList .edit', function () {
 		nowEditTrad = $(this).parents('li');
 		var val = $(this).parents('li').children('span.simp').attr('value');
 		$('#tradSimp').val(val);
@@ -491,7 +494,7 @@ function uiUserPhrase() {
 	$('#tableSimpList li.disabled span.icon-import').click(function () {
 		ImportOptions(messages.dlgImportPhraseSimp, 'simp');
 	});
-	$('#tableSimpList .edit').live('click', function () {
+	$(document).on('click', '#tableSimpList .edit', function () {
 		nowEditSimp = $(this).parents('li');
 		var val = $(this).parents('li').children('span.simp').attr('value');
 		$('#simpSimp').val(val);
