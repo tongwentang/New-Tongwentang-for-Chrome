@@ -1,6 +1,6 @@
 {
 	"extName": {
-		"message": "新同文堂",
+		"message": "新同文堂 (測試版)",
 		"description": ""
 	},
 	"extDescription": {
@@ -315,7 +315,7 @@
 		"message": "繁簡轉換：",
 		"description": ""
 	},
-	
+
 	"labelCustomPhraseEnable": {
 		"message": "啟用自訂詞彙",
 		"description": ""

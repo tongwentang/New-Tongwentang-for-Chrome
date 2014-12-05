@@ -1,6 +1,6 @@
 {
 	"extName": {
-		"message": "New Tong Wen Tang",
+		"message": "New Tong Wen Tang (Test Version)",
 		"description": ""
 	},
 	"extDescription": {
@@ -315,7 +315,7 @@
 		"message": "Conversion: ",
 		"description": ""
 	},
-	
+
 	"labelCustomPhraseEnable": {
 		"message": "Enable Customized Phrases",
 		"description": ""
