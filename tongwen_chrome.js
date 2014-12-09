@@ -1,4 +1,4 @@
-chrome.extension.onRequest.addListener(
+chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         var isInput = false, val, attr, zhflag;
 
@@ -80,7 +80,8 @@ chrome.extension.onRequest.addListener(
 );
 
 // window loaded
-chrome.extension.sendRequest(
+chrome.runtime.sendMessage(
+    '',
     {
         'baseURI': document.baseURI,
         'docURL' : document.URL
