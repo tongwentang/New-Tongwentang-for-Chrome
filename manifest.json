@@ -1,6 +1,6 @@
 {
     "name": "__MSG_extName__",
-    "version": "1.0.3.10",
+    "version": "1.0.4",
     "manifest_version": 2,
 
     "description": "__MSG_extDescription__",
@@ -18,8 +18,13 @@
     },
 
     "background": {
-        "persistent": false,
+        "persistent": true,
         "scripts": [
+            "lib/tongwen/tongwen_core.js",
+            "lib/tongwen/tongwen_table_s2t.js" ,
+            "lib/tongwen/tongwen_table_t2s.js",
+            "lib/tongwen/tongwen_table_ps2t.js" ,
+            "lib/tongwen/tongwen_table_pt2s.js",
             "lib/tongwen/tongwen_table_ss2t.js",
             "lib/tongwen/tongwen_table_st2s.js",
             "lib/tongwen/tongwen_init.js",
