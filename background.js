@@ -1,24 +1,17 @@
+var textArea = null;
+
 function getClipData() {
-    var node = document.getElementById('clipdata');
-    if (node === null) {
-        return '';
-    }
-    node.value = '';
-    node.focus();
+    textArea.value = '';
+    textArea.focus();
     document.execCommand('Paste');
-    return node.value;
+    return textArea.value;
 }
 
 function setClipData(val) {
-    var node = document.getElementById('clipdata');
-    if (node === null) {
-        return '';
-    }
-    node.value = val;
-    node.focus();
-    node.select();
+    textArea.value = val;
+    textArea.focus();
+    textArea.select();
     document.execCommand('Copy');
-    return node.value;
 }
 
 function doAction(tabId, act, flag, url, data) {
@@ -30,12 +23,7 @@ function doAction(tabId, act, flag, url, data) {
         data   : (typeof data === 'undefined') ? '' : data
     };
 
-    chrome.tabs.sendMessage(tabId, request, function(response) {
-        console.log(response);
-        //if (response.act === 'clip') {
-        //    setClipData(response.data);
-        //}
-    });
+    chrome.tabs.sendMessage(tabId, request, function(response) {});
 }
 
 // 設定圖示上的文字
@@ -62,41 +50,41 @@ function contextMenuAction() {
         'title'    : chrome.i18n.getMessage('extTitle'),
         'contexts' : contexts
     });
-    chrome.contextMenus.create({
-        'parentId' : pmenuID,
-        'type'     : 'normal',
-        'title'    : chrome.i18n.getMessage('contextInput2Trad'),
-        'contexts' : ['editable'],
-        'onclick'  : function () {
-            chrome.windows.getCurrent(function (win) {
-                chrome.tabs.query({'windowId': win.id, 'active': true}, function (tabAry) {
-                    if (tabAry) {
-                        doAction(tabAry[0].id, 'input', 'trad');
-                    }
-                });
-            });
-        }
-    });
-    chrome.contextMenus.create({
-        'parentId' : pmenuID,
-        'type'     : 'normal',
-        'title'    : chrome.i18n.getMessage('contextInput2Simp'),
-        'contexts' : ['editable'],
-        'onclick'  : function () {
-            chrome.windows.getCurrent(function (win) {
-                chrome.tabs.query({'windowId': win.id, 'active': true}, function (tabAry) {
-                    if (tabAry) {
-                        doAction(tabAry[0].id, 'input', 'simp');
-                    }
-                });
-            });
-        }
-    });
-    chrome.contextMenus.create({
-        'parentId' : pmenuID,
-        'type'     : 'separator',
-        'contexts' : ['editable']
-    });
+    //chrome.contextMenus.create({
+    //    'parentId' : pmenuID,
+    //    'type'     : 'normal',
+    //    'title'    : chrome.i18n.getMessage('contextInput2Trad'),
+    //    'contexts' : ['editable'],
+    //    'onclick'  : function () {
+    //        chrome.windows.getCurrent(function (win) {
+    //            chrome.tabs.query({'windowId': win.id, 'active': true}, function (tabAry) {
+    //                if (tabAry) {
+    //                    doAction(tabAry[0].id, 'input', 'trad');
+    //                }
+    //            });
+    //        });
+    //    }
+    //});
+    //chrome.contextMenus.create({
+    //    'parentId' : pmenuID,
+    //    'type'     : 'normal',
+    //    'title'    : chrome.i18n.getMessage('contextInput2Simp'),
+    //    'contexts' : ['editable'],
+    //    'onclick'  : function () {
+    //        chrome.windows.getCurrent(function (win) {
+    //            chrome.tabs.query({'windowId': win.id, 'active': true}, function (tabAry) {
+    //                if (tabAry) {
+    //                    doAction(tabAry[0].id, 'input', 'simp');
+    //                }
+    //            });
+    //        });
+    //    }
+    //});
+    //chrome.contextMenus.create({
+    //    'parentId' : pmenuID,
+    //    'type'     : 'separator',
+    //    'contexts' : ['editable']
+    //});
     chrome.contextMenus.create({
         'parentId' : pmenuID,
         'type'     : 'normal',
@@ -138,14 +126,9 @@ function contextMenuAction() {
         'title'    : chrome.i18n.getMessage('contextClip2Trad'),
         'contexts' : ['all'],
         'onclick'  : function () {
-            chrome.windows.getCurrent(function (win) {
-                chrome.tabs.query({'windowId': win.id, 'active': true}, function (tabAry) {
-                    var txt = getClipData();
-                    if (tabAry && (txt !== '')) {
-                        doAction(tabAry[0].id, 'clip', 'trad', tabAry[0].url, txt);
-                    }
-                });
-            });
+            var val, txt = getClipData();
+            val = TongWen.convert(txt, 'traditional');
+            setClipData(val);
         }
     });
     chrome.contextMenus.create({
@@ -154,21 +137,11 @@ function contextMenuAction() {
         'title'    : chrome.i18n.getMessage('contextClip2Simp'),
         'contexts' : ['all'],
         'onclick'  : function () {
-            chrome.windows.getCurrent(function (win) {
-                chrome.tabs.query({'windowId': win.id, 'active': true}, function (tabAry) {
-                    var txt = getClipData();
-                    if (tabAry && (txt !== '')) {
-                        doAction(tabAry[0].id, 'clip', 'simp', tabAry[0].url, txt);
-                    }
-                });
-            });
+            var val, txt = getClipData();
+            val = TongWen.convert(txt, 'simplified');
+            setClipData(val);
         }
     });
-}
-
-function doInit() {
-    iconActionStat();
-    contextMenuAction();
 }
 
 // Called when the user clicks on the browser action.
@@ -188,15 +161,22 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 // 更新設定檔
 chrome.runtime.onInstalled.addListener(function (details) {
     // details = {previousVersion: "1.0.3.9", reason: "update"};
-    console.log('Installed');
     var data = chrome.runtime.getManifest();
     tongwen.version = data.version;
     mergeConfig();
     reloadConfig();
-    doInit();
 });
 
-chrome.runtime.onStartup.addListener(function () {
-    console.log('Start');
-    //doInit();
+window.addEventListener('DOMContentLoaded', function (event) {
+    if (tongwen.userPhrase.enable) {
+        TongWen.addT2STable(tongwen.userPhrase.simp);
+        TongWen.addS2TTable(tongwen.userPhrase.trad);
+    }
+
+    iconActionStat();
+    contextMenuAction();
+
+    textArea = document.createElement('textarea');
+    textArea.id = 'clipdata';
+    document.body.appendChild(textArea);
 });
