@@ -1,12 +1,3 @@
-// 更新設定檔
-chrome.runtime.onInstalled.addListener(function (details) {
-    // details = {previousVersion: "1.0.3.9", reason: "update"};
-    var data = chrome.runtime.getManifest();
-    tongwen.version = data.version;
-    mergeConfig();
-    reloadConfig();
-});
-
 function getClipData() {
     var node = document.getElementById('clipdata');
     if (node === null) {
@@ -175,6 +166,11 @@ function contextMenuAction() {
     });
 }
 
+function doInit() {
+    iconActionStat();
+    contextMenuAction();
+}
+
 // Called when the user clicks on the browser action.
 chrome.browserAction.onClicked.addListener(function(tab) {
     doAction(tab.id, 'icon', tongwen.iconAction);
@@ -187,4 +183,20 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     tongwen.symbolS2T = symbolS2T;
     tongwen.symbolT2S = symbolT2S;
     sendResponse([tongwen, zhflag]);
+});
+
+// 更新設定檔
+chrome.runtime.onInstalled.addListener(function (details) {
+    // details = {previousVersion: "1.0.3.9", reason: "update"};
+    console.log('Installed');
+    var data = chrome.runtime.getManifest();
+    tongwen.version = data.version;
+    mergeConfig();
+    reloadConfig();
+    doInit();
+});
+
+chrome.runtime.onStartup.addListener(function () {
+    console.log('Start');
+    //doInit();
 });
