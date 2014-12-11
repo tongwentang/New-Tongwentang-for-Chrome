@@ -1,6 +1,6 @@
 {
     "name": "__MSG_extName__",
-    "version": "1.0.3.4",
+    "version": "1.0.4",
     "manifest_version": 2,
 
     "description": "__MSG_extDescription__",
@@ -14,20 +14,31 @@
 
     "browser_action": {
         "default_title": "__MSG_extTitle__",
-        "default_icon": "tongwen.png"
+        "default_icon": "icon/tongwen-icon-32.png"
     },
 
     "background": {
-        "page": "background.html"
+        "persistent": true,
+        "scripts": [
+            "lib/tongwen/tongwen_core.js",
+            "lib/tongwen/tongwen_table_s2t.js" ,
+            "lib/tongwen/tongwen_table_t2s.js",
+            "lib/tongwen/tongwen_table_ps2t.js" ,
+            "lib/tongwen/tongwen_table_pt2s.js",
+            "lib/tongwen/tongwen_table_ss2t.js",
+            "lib/tongwen/tongwen_table_st2s.js",
+            "lib/tongwen/tongwen_init.js",
+            "background.js"
+        ]
     },
 
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*", "file:///*"],
             "js": [
-                "./lib/tongwen/tongwen_core.js",
-                "./lib/tongwen/tongwen_table_s2t.js" , "./lib/tongwen/tongwen_table_t2s.js",
-                "./lib/tongwen/tongwen_table_ps2t.js", "./lib/tongwen/tongwen_table_pt2s.js"
+                "lib/tongwen/tongwen_core.js",
+                "lib/tongwen/tongwen_table_s2t.js" , "lib/tongwen/tongwen_table_t2s.js",
+                "lib/tongwen/tongwen_table_ps2t.js", "lib/tongwen/tongwen_table_pt2s.js"
             ],
             "run_at": "document_start",
             "all_frames": true
@@ -39,7 +50,7 @@
             "all_frames": true
         }
     ],
-    "minimum_chrome_version": "18",
+    "minimum_chrome_version": "33",
 
     "offline_enabled": true,
     "options_page": "options.html",

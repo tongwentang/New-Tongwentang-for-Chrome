@@ -1,31 +1,14 @@
-chrome.extension.onRequest.addListener(
+chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         var isInput = false, val, attr, zhflag;
-
-        if (request.act === 'clip') {
-            if (request.url !== document.baseURI) {
-                return;
-            }
-
-            val = '';
-            if (request.flag === 'trad') {
-                val = TongWen.convert(request.data, 'traditional');
-            } else if (request.flag === 'simp') {
-                val = TongWen.convert(request.data, 'simplified');
-            }
-            sendResponse({
-                act: 'clip',
-                data: val
-            });
-            return;
-        }
 
         // 輸入區文字轉換
         if (
             (request.act !== 'page')
                 && (typeof document.activeElement.tagName !== 'undefined')
                 && (request.tongwen.inputConvert !== 'none')
-            ) {
+            )
+        {
             if (document.activeElement.tagName.toLowerCase() === 'textarea') {
                 isInput = true;
             } else if (
@@ -80,7 +63,8 @@ chrome.extension.onRequest.addListener(
 );
 
 // window loaded
-chrome.extension.sendRequest(
+chrome.runtime.sendMessage(
+    '',
     {
         'baseURI': document.baseURI,
         'docURL' : document.URL
