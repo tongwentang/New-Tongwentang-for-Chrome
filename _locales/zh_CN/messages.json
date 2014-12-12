@@ -291,7 +291,7 @@
 		"description": ""
 	},
 	"labelContextMenuEnable": {
-		"message": "激活 右键选单 (浏览器重新启动后，才会生效)",
+		"message": "激活 右键选单",
 		"description": ""
 	},
 

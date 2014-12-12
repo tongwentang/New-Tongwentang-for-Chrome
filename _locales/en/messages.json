@@ -291,7 +291,7 @@
 		"description": ""
 	},
 	"labelContextMenuEnable": {
-		"message": "Enable Context/Right-Click Menu (will take effect after restarting browser)",
+		"message": "Enable Context/Right-Click Menu",
 		"description": ""
 	},
 
