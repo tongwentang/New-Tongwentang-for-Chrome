@@ -1,51 +1,31 @@
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        var isInput = false, val, attr, zhflag;
+        var isInput, val, tag, attr, zhflag, elem;
 
-        // 輸入區文字轉換
-        if (
-            (request.act !== 'page')
-                && (typeof document.activeElement.tagName !== 'undefined')
-                && (request.tongwen.inputConvert !== 'none')
-            )
-        {
-            if (document.activeElement.tagName.toLowerCase() === 'textarea') {
-                isInput = true;
-            } else if (
-                (document.activeElement.tagName.toLowerCase() === 'input')
-                    && (document.activeElement.type.toLowerCase() === 'text')
-                ) {
-                isInput = true;
-            } else if (document.activeElement.isContentEditable) {
-                isInput = false;
-            }
-        }
+        elem = document.activeElement;
+        tag = (typeof elem.tagName === 'undefined') ? '' : elem.tagName.toLowerCase();
+        val = (typeof elem.type === 'undefined') ? '' : elem.type.toLowerCase();
+        isInput = ((['textarea', 'input'].indexOf(tag) >= 0) && (['textarea', 'text'].indexOf(val) >= 0));
 
-        if (isInput) {
+        if (isInput && ((request.act === 'input') || (request.tongwen.inputConvert !== 'none'))) {
             // 輸入區文字轉換
-            zhflag = (request.act === 'input') ? request.flag : request.tongwen.inputConvert;
+            zhflag = request.flag;
             val = document.activeElement.value;
-            switch (zhflag) {
-                case 'auto':
-                    attr = document.activeElement.getAttribute('zhtongwen');
-                    if (attr === null) {
-                        zhflag = 'traditional';
-                    } else {
-                        zhflag = (attr === 'traditional') ? 'simplified' : 'traditional';
-                    }
-                    document.activeElement.setAttribute('zhtongwen', zhflag);
-                    document.activeElement.value = TongWen.convert(val, zhflag);
-                    break;
-
-                case 'trad':
-                    document.activeElement.value = TongWen.convert(val, 'traditional');
-                    break;
-
-                case 'simp':
-                    document.activeElement.value = TongWen.convert(val, 'simplified');
-                    break;
+            if (zhflag === 'auto') {
+                attr = document.activeElement.getAttribute('zhtongwen');
+                if (attr === null) {
+                    zhflag = 'traditional';
+                } else {
+                    zhflag = (attr === 'traditional') ? 'simplified' : 'traditional';
+                }
+                document.activeElement.setAttribute('zhtongwen', zhflag);
+                document.activeElement.value = TongWen.convert(val, zhflag);
+            } else if (zhflag === 'trad') {
+                document.activeElement.value = TongWen.convert(val, 'traditional');
+            } else if (zhflag === 'simp') {
+                document.activeElement.value = TongWen.convert(val, 'simplified');
             }
-        } else if (request.act !== 'input') {
+        } else {
             // 網頁轉換
             switch (request.flag) {
                 case 'auto':
