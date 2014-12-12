@@ -645,7 +645,6 @@ $(function () {
 
     $('#tongwenWrap').dialog({
         modal: false,
-        position: 'top',
         draggable: false,
         resizable: false,
         title: messages.optionTitle,
@@ -661,8 +660,6 @@ $(function () {
     $('[aria-describedby=tongwenWrap] .ui-dialog-buttonpane').append(
         '<span class="left" style="margin-top: 10px; margin-left: 5px;">v' + tongwen.version + '</span>'
     );
-        //.before('<span class="ui-dialog-title right">' + messages.optionVersion + tongwen.version + '</span>')
-
 
     $('#fontEnable').click(function () {
         $('#fontTrad').prop('disabled', !this.checked);
