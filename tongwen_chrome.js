@@ -1,6 +1,11 @@
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        var isInput, val, tag, attr, zhflag, elem;
+        var isInput, val, tag, attr, zhflag, elem, lang;
+
+        lang = document.documentElement.getAttribute('lang');
+        if ((lang === null) && (request.lang !== false)) {
+            document.documentElement.setAttribute('lang', request.lang);
+        }
 
         elem = document.activeElement;
         tag = (typeof elem.tagName === 'undefined') ? '' : elem.tagName.toLowerCase();
