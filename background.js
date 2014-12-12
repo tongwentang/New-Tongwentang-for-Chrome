@@ -1,4 +1,21 @@
-var textArea = null;
+var textArea = null, menuId = null;
+
+/**
+ * 重新載入設定值
+ **/
+function reloadConfig(act) {
+    tongwen = JSON.parse(localStorage.tongwen);
+
+    if (act === 'options') {
+        if (tongwen.contextMenu.enable) {
+            contextMenuAction();
+        } else {
+            chrome.contextMenus.removeAll(function () {
+                menuId = null;
+            });
+        }
+    }
+}
 
 function getClipData() {
     textArea.value = '';
@@ -38,20 +55,18 @@ function iconActionStat() {
 
 // context menus
 function contextMenuAction() {
-    if (!tongwen.contextMenu.enable) {
+    if (menuId !== null) {
         return;
     }
-    var
-        pmenuID,
-        contexts = ['page', 'selection', 'link', 'editable', 'image', 'video', 'audio'];
+    var contexts = ['page', 'selection', 'link', 'editable', 'image', 'video', 'audio'];
 
-    pmenuID = chrome.contextMenus.create({
+    menuId = chrome.contextMenus.create({
         'type'     : 'normal',
         'title'    : chrome.i18n.getMessage('extTitle'),
         'contexts' : contexts
     });
     chrome.contextMenus.create({
-        'parentId' : pmenuID,
+        'parentId' : menuId,
         'type'     : 'normal',
         'title'    : chrome.i18n.getMessage('contextInput2Trad'),
         'contexts' : ['editable'],
@@ -66,7 +81,7 @@ function contextMenuAction() {
         }
     });
     chrome.contextMenus.create({
-        'parentId' : pmenuID,
+        'parentId' : menuId,
         'type'     : 'normal',
         'title'    : chrome.i18n.getMessage('contextInput2Simp'),
         'contexts' : ['editable'],
@@ -81,12 +96,12 @@ function contextMenuAction() {
         }
     });
     chrome.contextMenus.create({
-        'parentId' : pmenuID,
+        'parentId' : menuId,
         'type'     : 'separator',
         'contexts' : ['editable']
     });
     chrome.contextMenus.create({
-        'parentId' : pmenuID,
+        'parentId' : menuId,
         'type'     : 'normal',
         'title'    : chrome.i18n.getMessage('contextPage2Trad'),
         'contexts' : ['all'],
@@ -101,7 +116,7 @@ function contextMenuAction() {
         }
     });
     chrome.contextMenus.create({
-        'parentId' : pmenuID,
+        'parentId' : menuId,
         'type'     : 'normal',
         'title'    : chrome.i18n.getMessage('contextPage2Simp'),
         'contexts' : ['all'],
@@ -116,12 +131,12 @@ function contextMenuAction() {
         }
     });
     chrome.contextMenus.create({
-        'parentId' : pmenuID,
+        'parentId' : menuId,
         'type'     : 'separator',
         'contexts' : ['all']
     });
     chrome.contextMenus.create({
-        'parentId' : pmenuID,
+        'parentId' : menuId,
         'type'     : 'normal',
         'title'    : chrome.i18n.getMessage('contextClip2Trad'),
         'contexts' : ['all'],
@@ -132,7 +147,7 @@ function contextMenuAction() {
         }
     });
     chrome.contextMenus.create({
-        'parentId' : pmenuID,
+        'parentId' : menuId,
         'type'     : 'normal',
         'title'    : chrome.i18n.getMessage('contextClip2Simp'),
         'contexts' : ['all'],
@@ -164,7 +179,6 @@ chrome.runtime.onInstalled.addListener(function (details) {
     var data = chrome.runtime.getManifest();
     tongwen.version = data.version;
     mergeConfig();
-    reloadConfig();
 });
 
 window.addEventListener('DOMContentLoaded', function (event) {
@@ -173,8 +187,11 @@ window.addEventListener('DOMContentLoaded', function (event) {
         TongWen.addS2TTable(tongwen.userPhrase.trad);
     }
 
+    reloadConfig('self');
     iconActionStat();
-    contextMenuAction();
+    if (tongwen.contextMenu.enable) {
+        contextMenuAction();
+    }
 
     textArea = document.createElement('textarea');
     textArea.id = 'clipdata';

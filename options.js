@@ -1,9 +1,7 @@
-var timer = null;
-var tongwen = {};
-var nowEditUrl = null, nowEditTrad = null, nowEditSimp = null;
-var messages = {};
-var flagmap = {};
-var btnList = null;
+var
+    tongwen = {}, timer = null, btnList = null,
+    nowEditUrl = null, nowEditTrad = null, nowEditSimp = null,
+    messages = {}, flagmap = {};
 
 // ----------------------------------------------------------------------
 // 自動轉換設定
@@ -183,7 +181,7 @@ function saveOptions() {
     localStorage['tongwen'] = JSON.stringify(tongwen);
 
     var bgPage = chrome.extension.getBackgroundPage();
-    bgPage.reloadConfig();
+    bgPage.reloadConfig('options');
     bgPage.iconActionStat();
 
     // 顯示訊息

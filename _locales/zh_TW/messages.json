@@ -291,7 +291,7 @@
 		"description": ""
 	},
 	"labelContextMenuEnable": {
-		"message": "啟用 右鍵選單 (瀏覽器重新啟動後，才會生效)",
+		"message": "啟用 右鍵選單",
 		"description": ""
 	},
 
