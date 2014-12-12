@@ -50,41 +50,41 @@ function contextMenuAction() {
         'title'    : chrome.i18n.getMessage('extTitle'),
         'contexts' : contexts
     });
-    //chrome.contextMenus.create({
-    //    'parentId' : pmenuID,
-    //    'type'     : 'normal',
-    //    'title'    : chrome.i18n.getMessage('contextInput2Trad'),
-    //    'contexts' : ['editable'],
-    //    'onclick'  : function () {
-    //        chrome.windows.getCurrent(function (win) {
-    //            chrome.tabs.query({'windowId': win.id, 'active': true}, function (tabAry) {
-    //                if (tabAry) {
-    //                    doAction(tabAry[0].id, 'input', 'trad');
-    //                }
-    //            });
-    //        });
-    //    }
-    //});
-    //chrome.contextMenus.create({
-    //    'parentId' : pmenuID,
-    //    'type'     : 'normal',
-    //    'title'    : chrome.i18n.getMessage('contextInput2Simp'),
-    //    'contexts' : ['editable'],
-    //    'onclick'  : function () {
-    //        chrome.windows.getCurrent(function (win) {
-    //            chrome.tabs.query({'windowId': win.id, 'active': true}, function (tabAry) {
-    //                if (tabAry) {
-    //                    doAction(tabAry[0].id, 'input', 'simp');
-    //                }
-    //            });
-    //        });
-    //    }
-    //});
-    //chrome.contextMenus.create({
-    //    'parentId' : pmenuID,
-    //    'type'     : 'separator',
-    //    'contexts' : ['editable']
-    //});
+    chrome.contextMenus.create({
+        'parentId' : pmenuID,
+        'type'     : 'normal',
+        'title'    : chrome.i18n.getMessage('contextInput2Trad'),
+        'contexts' : ['editable'],
+        'onclick'  : function () {
+            chrome.windows.getCurrent(function (win) {
+                chrome.tabs.query({'windowId': win.id, 'active': true}, function (tabAry) {
+                    if (tabAry) {
+                        doAction(tabAry[0].id, 'input', 'trad');
+                    }
+                });
+            });
+        }
+    });
+    chrome.contextMenus.create({
+        'parentId' : pmenuID,
+        'type'     : 'normal',
+        'title'    : chrome.i18n.getMessage('contextInput2Simp'),
+        'contexts' : ['editable'],
+        'onclick'  : function () {
+            chrome.windows.getCurrent(function (win) {
+                chrome.tabs.query({'windowId': win.id, 'active': true}, function (tabAry) {
+                    if (tabAry) {
+                        doAction(tabAry[0].id, 'input', 'simp');
+                    }
+                });
+            });
+        }
+    });
+    chrome.contextMenus.create({
+        'parentId' : pmenuID,
+        'type'     : 'separator',
+        'contexts' : ['editable']
+    });
     chrome.contextMenus.create({
         'parentId' : pmenuID,
         'type'     : 'normal',
