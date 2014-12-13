@@ -311,6 +311,18 @@ chrome.runtime.onInstalled.addListener(function (details) {
     mergeConfig();
 });
 
+chrome.commands.onCommand.addListener(function (command) {
+    if (command === 'page-trad') {
+        getActiveTab(function (tab) {
+            doAction(tab, 'page', 'trad');
+        });
+    } else if (command === 'page-simp') {
+        getActiveTab(function (tab) {
+            doAction(tab, 'page', 'simp');
+        });
+    }
+});
+
 window.addEventListener('DOMContentLoaded', function (event) {
     reloadConfig('self');
     iconActionStat();
