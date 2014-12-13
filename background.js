@@ -1,6 +1,7 @@
 var
     textArea = null,
     menuId = null,
+    isOpera = false,
     tongwen = {
     'version'     : '',
     'autoConvert' : 'none',
@@ -123,21 +124,31 @@ function setClipData(val) {
 }
 
 function doAction(tab, act, flag) {
-    chrome.tabs.detectLanguage(tab.id, function (lang) {
-        lang = lang.toLocaleLowerCase();
-
+    if (isOpera) {
         var request = {
             'tongwen': tongwen,
             'act': act,
             'flag': ('trad,simp'.indexOf(flag) < 0) ? 'auto' : flag,
-            'lang': lang === 'und' ? false : lang
+            'lang': false
         };
-
         chrome.tabs.sendMessage(tab.id, request, function(response) {});
-    });
+    } else {
+        chrome.tabs.detectLanguage(tab.id, function (lang) {
+            lang = lang.toLocaleLowerCase();
+            var request = {
+                'tongwen': tongwen,
+                'act': act,
+                'flag': ('trad,simp'.indexOf(flag) < 0) ? 'auto' : flag,
+                'lang': lang === 'und' ? false : lang
+            };
+            chrome.tabs.sendMessage(tab.id, request, function(response) {});
+        });
+    }
 }
 
-// 設定圖示上的文字
+/**
+ * 設定圖示上的文字
+ */
 function iconActionStat() {
     chrome.browserAction.setBadgeBackgroundColor({'color': '#C0C0C0'});
     switch (tongwen.iconAction) {
@@ -152,19 +163,29 @@ function iconActionStat() {
  * @param {function} callback
  */
 function getActiveTab(callback) {
-    chrome.tabs.query(
-        {
-            'highlighted': true,
-            'currentWindow': true
-        },
-        function (tab) {
-            if (typeof callback === 'function') {
-                if ((typeof tab !== 'undefined') && (tab.length > 0)) {
-                    callback.call(this, tab[0]);
+    if (isOpera) {
+        chrome.windows.getCurrent({'populate': true}, function (win) {
+            chrome.tabs.getSelected(win.id, function (tab) {
+                if (typeof callback === 'function') {
+                    callback.call(this, tab);
+                }
+            });
+        });
+    } else {
+        chrome.tabs.query(
+            {
+                'highlighted': true,
+                'currentWindow': true
+            },
+            function (tab) {
+                if (typeof callback === 'function') {
+                    if ((typeof tab !== 'undefined') && (tab.length > 0)) {
+                        callback.call(this, tab[0]);
+                    }
                 }
             }
-        }
-    );
+        );
+    }
 }
 
 /**
@@ -293,6 +314,8 @@ chrome.runtime.onInstalled.addListener(function (details) {
 window.addEventListener('DOMContentLoaded', function (event) {
     reloadConfig('self');
     iconActionStat();
+
+    isOpera = (navigator.vendor.indexOf('Opera ') >= 0);
     if (tongwen.contextMenu.enable) {
         contextMenuAction();
     }
