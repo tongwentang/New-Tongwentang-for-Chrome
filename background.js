@@ -312,6 +312,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 });
 
 chrome.commands.onCommand.addListener(function (command) {
+    var val, txt;
     if (command === 'page-trad') {
         getActiveTab(function (tab) {
             doAction(tab, 'page', 'trad');
@@ -320,6 +321,14 @@ chrome.commands.onCommand.addListener(function (command) {
         getActiveTab(function (tab) {
             doAction(tab, 'page', 'simp');
         });
+    } else if (command === 'clip-trad') {
+        txt = getClipData();
+        val = TongWen.convert(txt, 'traditional');
+        setClipData(val);
+    } else if (command === 'clip-simp') {
+        txt = getClipData();
+        val = TongWen.convert(txt, 'simplified');
+        setClipData(val);
     }
 });
 
