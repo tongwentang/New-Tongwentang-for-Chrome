@@ -364,17 +364,16 @@ window.addEventListener('DOMContentLoaded', function (event) {
     // clip 需要的
     textArea = document.getElementById('clipdata');
 
-    setTimeout(function () {
-        reloadConfig('self');
-        iconActionStat();
+    mergeConfig();
+    reloadConfig('self');
+    iconActionStat();
 
-        if (tongwen.contextMenu.enable) {
-            contextMenuAction();
-        }
+    if (tongwen.contextMenu.enable) {
+        contextMenuAction();
+    }
 
-        if (tongwen.userPhrase.enable) {
-            TongWen.addT2STable(tongwen.userPhrase.simp);
-            TongWen.addS2TTable(tongwen.userPhrase.trad);
-        }
-    }, 1000);
+    if (tongwen.userPhrase.enable) {
+        TongWen.addT2STable(tongwen.userPhrase.simp);
+        TongWen.addS2TTable(tongwen.userPhrase.trad);
+    }
 });
