@@ -2,32 +2,33 @@ var
     textArea = null,
     menuId = null,
     isOpera = false,
+    isOptions = false,
     tongwen = {
-    'version'     : '',
-    'autoConvert' : 'none',
-    'iconAction'  : 'auto',
-    'symConvert'  : true,
-    'inputConvert': 'none',
-    'fontCustom'  : {
-        'enable': false,
-        'trad'  : 'PMingLiU,MingLiU,新細明體,細明體',
-        'simp'  : 'MS Song,宋体,SimSun'
-    },
-    'urlFilter'   : {
-        'enable': false,
-        'list'  : [
-//			{ 'url': '', 'zhflag': 'none, trad, simp' }
-        ]
-    },
-    'userPhrase'  : {
-        'enable': false,
-        'trad'  : {},
-        'simp'  : {}
-    },
-    'contextMenu' : {
-        'enable': true
-    }
-};
+        'version'     : '',
+        'autoConvert' : 'none',
+        'iconAction'  : 'auto',
+        'symConvert'  : true,
+        'inputConvert': 'none',
+        'fontCustom'  : {
+            'enable': false,
+            'trad'  : 'PMingLiU,MingLiU,新細明體,細明體',
+            'simp'  : 'MS Song,宋体,SimSun'
+        },
+        'urlFilter'   : {
+            'enable': false,
+            'list'  : [
+                // { 'url': '', 'zhflag': 'none, trad, simp' }
+            ]
+        },
+        'userPhrase'  : {
+            'enable': false,
+            'trad'  : {},
+            'simp'  : {}
+        },
+        'contextMenu' : {
+            'enable': true
+        }
+    };
 
 /**
  * 重新載入設定值
@@ -36,6 +37,7 @@ function reloadConfig(act) {
     tongwen = JSON.parse(localStorage.tongwen);
 
     if (act === 'options') {
+        isOptions = true;
         if (tongwen.contextMenu.enable) {
             contextMenuAction();
         } else {
@@ -69,7 +71,7 @@ function mergeConfig() {
 }
 
 function urlFilterAction(uri) {
-    var lst = tongwen.urlFilter.list, i, c, url = '', re = null;
+    var lst = tongwen.urlFilter.list, i, c, url, re = null;
     for (i = 0, c = lst.length; i < c; i += 1) {
         if (lst[i].url.indexOf('*') >= 0) {
             // var url = lst[i].url.replace(/(\W+)/ig, '\\$1').replace('*.', '*\\.').replace(/\*/ig, '\\w*'); // 較為嚴謹
@@ -303,14 +305,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     sendResponse([tongwen, zhflag]);
 });
 
-// 更新設定檔
-chrome.runtime.onInstalled.addListener(function (details) {
-    // details = {previousVersion: "1.0.3.9", reason: "update"};
-    var data = chrome.runtime.getManifest();
-    tongwen.version = data.version;
-    mergeConfig();
-});
-
 chrome.commands.onCommand.addListener(function (command) {
     var val, txt;
     if (command === 'page-trad') {
@@ -332,21 +326,55 @@ chrome.commands.onCommand.addListener(function (command) {
     }
 });
 
+// Storage 有更動時
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+    if (isOptions) {
+        // 忽略本機，已經儲存過了
+        isOptions = false;
+        return;
+    }
+
+    var key, storageChange, isChange = false;
+    for (key in changes) {
+        if (changes.hasOwnProperty(key)) {
+            if (key === 'version') {
+                continue;
+            }
+            storageChange = changes[key];
+            tongwen[key] = storageChange.newValue;
+            isChange = true;
+        }
+    }
+    if (isChange) {
+        localStorage.tongwen = JSON.stringify(tongwen); // 回存設定
+    }
+});
+
+// 更新設定檔
+chrome.runtime.onInstalled.addListener(function (details) {
+    // details = {previousVersion: "1.0.3.9", reason: "update"};
+    var data = chrome.runtime.getManifest();
+    tongwen.version = data.version;
+    mergeConfig();
+});
+
 window.addEventListener('DOMContentLoaded', function (event) {
-    reloadConfig('self');
-    iconActionStat();
-
     isOpera = (navigator.vendor.indexOf('Opera ') >= 0);
-    if (tongwen.contextMenu.enable) {
-        contextMenuAction();
-    }
 
-    if (tongwen.userPhrase.enable) {
-        TongWen.addT2STable(tongwen.userPhrase.simp);
-        TongWen.addS2TTable(tongwen.userPhrase.trad);
-    }
+    // clip 需要的
+    textArea = document.getElementById('clipdata');
 
-    textArea = document.createElement('textarea');
-    textArea.id = 'clipdata';
-    document.body.appendChild(textArea);
+    setTimeout(function () {
+        reloadConfig('self');
+        iconActionStat();
+
+        if (tongwen.contextMenu.enable) {
+            contextMenuAction();
+        }
+
+        if (tongwen.userPhrase.enable) {
+            TongWen.addT2STable(tongwen.userPhrase.simp);
+            TongWen.addS2TTable(tongwen.userPhrase.trad);
+        }
+    }, 1000);
 });

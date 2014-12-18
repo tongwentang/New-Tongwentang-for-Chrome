@@ -179,6 +179,10 @@ function saveOptions() {
 
     // 回存
     localStorage['tongwen'] = JSON.stringify(tongwen);
+    // 使用 Chrome Sync 來同步設定
+    chrome.storage.sync.set(tongwen, function() {
+        console.log('Settings saved!');
+    });
 
     var bgPage = chrome.extension.getBackgroundPage();
     bgPage.reloadConfig('options');
