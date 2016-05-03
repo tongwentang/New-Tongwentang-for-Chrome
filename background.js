@@ -141,7 +141,7 @@ function doAction(tab, act, flag) {
                 'tongwen': tongwen,
                 'act': act,
                 'flag': ('trad,simp'.indexOf(flag) < 0) ? 'auto' : flag,
-                'lang': lang === 'und' ? false : lang
+                'lang': lang === 'undefined' ? false : lang
             };
             chrome.tabs.sendMessage(tab.id, request, function(response) {});
         });
