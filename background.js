@@ -136,12 +136,12 @@ function doAction(tab, act, flag) {
         chrome.tabs.sendMessage(tab.id, request, function(response) {});
     } else {
         chrome.tabs.detectLanguage(tab.id, function (lang) {
-            lang = lang.toLocaleLowerCase();
+            lang = typeof lang === 'undefined' ? false : lang.toLocaleLowerCase();
             var request = {
                 'tongwen': tongwen,
                 'act': act,
                 'flag': ('trad,simp'.indexOf(flag) < 0) ? 'auto' : flag,
-                'lang': lang === 'undefined' ? false : lang
+                'lang': lang
             };
             chrome.tabs.sendMessage(tab.id, request, function(response) {});
         });
