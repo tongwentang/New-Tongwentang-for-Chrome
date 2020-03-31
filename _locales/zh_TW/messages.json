@@ -1,6 +1,6 @@
 {
 	"extName": {
-		"message": "新同文堂",
+		"message": "新同文堂 (支援 SPA 網頁)",
 		"description": ""
 	},
 	"extDescription": {
@@ -8,7 +8,7 @@
 		"description": ""
 	},
 	"extTitle": {
-		"message": "新同文堂",
+		"message": "新同文堂 (支援 SPA 網頁)",
 		"description": ""
 	},
 	"optionTitle": {
