@@ -1,7 +1,6 @@
 var
     textArea = null,
     menuId = null,
-    isOpera = false,
     isOptions = false,
     tongwen = {
         'version'     : '',
@@ -126,26 +125,16 @@ function setClipData(val) {
 }
 
 function doAction(tab, act, flag) {
-    if (isOpera) {
+    chrome.tabs.detectLanguage(tab.id, function (lang) {
+        lang = typeof lang === 'undefined' ? false : lang.toLocaleLowerCase();
         var request = {
             'tongwen': tongwen,
             'act': act,
             'flag': ('trad,simp'.indexOf(flag) < 0) ? 'auto' : flag,
-            'lang': false
+            'lang': lang
         };
         chrome.tabs.sendMessage(tab.id, request, function(response) {});
-    } else {
-        chrome.tabs.detectLanguage(tab.id, function (lang) {
-            lang = typeof lang === 'undefined' ? false : lang.toLocaleLowerCase();
-            var request = {
-                'tongwen': tongwen,
-                'act': act,
-                'flag': ('trad,simp'.indexOf(flag) < 0) ? 'auto' : flag,
-                'lang': lang
-            };
-            chrome.tabs.sendMessage(tab.id, request, function(response) {});
-        });
-    }
+    });
 }
 
 /**
@@ -157,36 +146,6 @@ function iconActionStat() {
         case 'trad': chrome.browserAction.setBadgeText({'text': 'T'}); break;
         case 'simp': chrome.browserAction.setBadgeText({'text': 'S'}); break;
         default    : chrome.browserAction.setBadgeText({'text': ''});
-    }
-}
-
-/**
- * 取得目前顯示的 Tab
- * @param {function} callback
- */
-function getActiveTab(callback) {
-    if (isOpera) {
-        chrome.windows.getCurrent({'populate': true}, function (win) {
-            chrome.tabs.getSelected(win.id, function (tab) {
-                if (typeof callback === 'function') {
-                    callback.call(this, tab);
-                }
-            });
-        });
-    } else {
-        chrome.tabs.query(
-            {
-                'highlighted': true,
-                'currentWindow': true
-            },
-            function (tab) {
-                if (typeof callback === 'function') {
-                    if ((typeof tab !== 'undefined') && (tab.length > 0)) {
-                        callback.call(this, tab[0]);
-                    }
-                }
-            }
-        );
     }
 }
 
@@ -212,7 +171,7 @@ function contextMenuAction() {
         'title'    : chrome.i18n.getMessage('contextInput2Trad'),
         'contexts' : ['editable'],
         'onclick'  : function () {
-            getActiveTab(function (tab) {
+            chrome.tabs.query({ currentWindow: true, active: true }, function ([tab]) {
                 doAction(tab, 'input', 'trad');
             });
         }
@@ -224,7 +183,7 @@ function contextMenuAction() {
         'title'    : chrome.i18n.getMessage('contextInput2Simp'),
         'contexts' : ['editable'],
         'onclick'  : function () {
-            getActiveTab(function (tab) {
+            chrome.tabs.query({ currentWindow: true, active: true }, function ([tab]) {
                 doAction(tab, 'input', 'simp');
             });
         }
@@ -242,7 +201,7 @@ function contextMenuAction() {
         'title'    : chrome.i18n.getMessage('contextPage2Trad'),
         'contexts' : ['all'],
         'onclick'  : function () {
-            getActiveTab(function (tab) {
+            chrome.tabs.query({ currentWindow: true, active: true }, function ([tab]) {
                 doAction(tab, 'page', 'trad');
             });
         }
@@ -254,7 +213,7 @@ function contextMenuAction() {
         'title'    : chrome.i18n.getMessage('contextPage2Simp'),
         'contexts' : ['all'],
         'onclick'  : function () {
-            getActiveTab(function (tab) {
+            chrome.tabs.query({ currentWindow: true, active: true }, function ([tab]) {
                 doAction(tab, 'page', 'simp');
             });
         }
@@ -308,11 +267,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 chrome.commands.onCommand.addListener(function (command) {
     var val, txt;
     if (command === 'page-trad') {
-        getActiveTab(function (tab) {
+        chrome.tabs.query({ currentWindow: true, active: true }, function ([tab]) {
             doAction(tab, 'page', 'trad');
         });
     } else if (command === 'page-simp') {
-        getActiveTab(function (tab) {
+        chrome.tabs.query({ currentWindow: true, active: true }, function ([tab]) {
             doAction(tab, 'page', 'simp');
         });
     } else if (command === 'clip-trad') {
@@ -359,8 +318,6 @@ chrome.runtime.onInstalled.addListener(function (details) {
 });
 
 window.addEventListener('DOMContentLoaded', function (event) {
-    isOpera = (navigator.vendor.indexOf('Opera ') >= 0);
-
     // clip 需要的
     textArea = document.getElementById('clipdata');
 
